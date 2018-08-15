@@ -1,0 +1,12 @@
+/auto-save-list
+/elpa
+/eshell
+/games
+/recentf
+/rust-playground
+/semanticdb
+tramp
+/url
+*~
+# I'm not sure if this one isn't needed
+opam-user-setup.el
