@@ -101,6 +101,7 @@
      forth-mode
      lua-mode
      elm-mode
+     racket-mode
      csharp-mode
      fsharp-mode
      ;; additions for programming languages
