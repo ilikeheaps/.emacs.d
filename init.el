@@ -6,6 +6,13 @@
 ;; provides =flet= (and more)
 (eval-when-compile (require 'cl))
 
+;; Highlight matching parentheses when the point is on them.
+(show-paren-mode 1)
+;; Disable menubar
+(menu-bar-mode 0)
+;; Disable toolbar
+(tool-bar-mode 0)
+
 ;; vanilla Emacs global keybinds
 (flet ((set-key (str fun) (global-set-key (kbd str) fun)))
   (progn
@@ -254,14 +261,6 @@
   ;;                                     (and (string-prefix-p "*" buffname)
   ;;                                          (not (string= "*scratch*" buffname))))))))
   ;;     (setq cwm-ignore-buffer-predicates nil))))
-
-;; Highlight matching parentheses when the point is on them.
-(show-paren-mode 1)
-;; Disable menubar
-(menu-bar-mode 0)
-;; Disable toolbar
-(tool-bar-mode 0)
-
 
 ;;;; org-mode
 
