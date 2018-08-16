@@ -263,7 +263,7 @@
   ;;     (setq cwm-ignore-buffer-predicates nil))))
 
 ;;;; org-mode
-
+(require 'org)
 ;;; enable pretty bullets
 (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
