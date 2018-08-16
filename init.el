@@ -3,6 +3,22 @@
 ;; No commentary here, flycheck just wanted me to put these sections here
 ;;; Code:
 
+;; provides =flet= (and more)
+(eval-when-compile (require 'cl))
+
+;; vanilla Emacs global keybinds
+(flet ((set-key (str fun) (global-set-key (kbd str) fun)))
+  (progn
+    ;; Turn on horizontal scrolling with mouse wheel
+    (set-key "<mouse-6>" '(lambda ()
+                            (interactive)
+                            (scroll-right 1)))
+    (set-key "<mouse-7>" '(lambda ()
+                            (interactive)
+                            (scroll-left 1)))
+    ;; buffer-menu instead of list-buffers (opens in current window and allows editing)
+    (set-key "C-x C-b" 'buffer-menu)))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -114,25 +130,6 @@
  '(semantic-mode t)
  '(tooltip-hide-delay 1200))
 
-;; Turn on horizontal scrolling with mouse wheel
-(global-set-key (kbd "<mouse-6>") '(lambda ()
-				     (interactive)
-				     (scroll-right 1)))
-(global-set-key (kbd "<mouse-7>") '(lambda ()
-				     (interactive)
-				     (scroll-left 1)))
-
-;; various keybinds
-(global-set-key (kbd "C-c m") 'magit-status)
-(global-set-key (kbd "C-c l") 'org-store-link)
-(global-set-key (kbd "C-c a") 'org-agenda-list)
-(global-set-key (kbd "C-c C-s") 'org-cycle-agenda-files)
-;(global-set-key (kbd "<muhenkan> t") 'org-cycle-agenda-files)
-
-;; buffer-menu instead of list-buffers (opens in current window and allows editing)
-(global-set-key (kbd "C-x C-b") 'buffer-menu)
-
-
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -151,6 +148,16 @@
 (unless package-archive-contents
   (package-refresh-contents))
 (package-install-selected-packages)
+
+;; package-dependent global keybinds
+(flet ((set-key (str fun) (global-set-key (kbd str) fun)))
+  (progn
+    (set-key "C-c m" 'magit-status)
+    (set-key "C-c l" 'org-store-link)
+    (set-key "C-c a" 'org-agenda-list)
+    (set-key "C-c C-s" 'org-cycle-agenda-files)))
+
+;(global-set-key (kbd "<muhenkan> t") 'org-cycle-agenda-files)
 
 ;; ## added by OPAM user-setup for emacs / base ## 56ab50dc8996d2bb95e7856a6eddb17b ## you can edit, but keep this line
 (require 'opam-user-setup "~/.emacs.d/opam-user-setup.el")
