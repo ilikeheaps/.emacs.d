@@ -295,4 +295,4 @@
 (setq frame-title-format "%b")
 
 
-;;; .emacs ends here
+;;; init.el ends here
