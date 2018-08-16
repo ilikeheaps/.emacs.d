@@ -17,7 +17,13 @@
                             (interactive)
                             (scroll-left 1)))
     ;; buffer-menu instead of list-buffers (opens in current window and allows editing)
-    (set-key "C-x C-b" 'buffer-menu)))
+    (set-key "C-x C-b" 'buffer-menu)
+    (set-key "C-u" 'scroll-down-line)
+    (set-key "C-e" 'scroll-up-line)
+    ;; rebind universal-argument from C-u
+    (set-key "C-l" 'universal-argument)
+    (define-key universal-argument-map (kbd "C-l") 'universal-argument-more)
+    (define-key universal-argument-map (kbd "C-u") 'scroll-down-line)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
