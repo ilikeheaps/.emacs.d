@@ -10,3 +10,4 @@ tramp
 *~
 # I'm not sure if this one isn't needed
 opam-user-setup.el
+config-local.el
