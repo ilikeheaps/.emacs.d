@@ -290,6 +290,10 @@
 ;; display just the buffer name
 (setq frame-title-format "%b")
 
+(unless (file-exists-p "~/.emacs.d/config-local.el")
+  (copy-file "~/.emacs.d/config-local-template.el"
+             "~/.emacs.d/config-local.el"
+             nil t nil nil))
 (require 'config-local "~/.emacs.d/config-local.el")
 
 ;;; init.el ends here
