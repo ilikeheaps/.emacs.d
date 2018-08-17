@@ -6,6 +6,12 @@
 ;; provides =flet= (and more)
 (eval-when-compile (require 'cl))
 
+
+;;; titlebar format
+;; (setq frame-title-format
+;;      '(multiple-frames "%b" ("" invocation-name "@" system-name " - %b")))
+;; display just the buffer name
+(setq frame-title-format "%b")
 ;; Highlight matching parentheses when the point is on them.
 (show-paren-mode 1)
 ;; Disable menubar
@@ -283,12 +289,6 @@
 ;;Fira Code font when available
 (when (and (window-system) (font-info "Fira Code"))
   (set-frame-font "Fira Code"))
-
-;;; titlebar format
-;; (setq frame-title-format
-;;      '(multiple-frames "%b" ("" invocation-name "@" system-name " - %b")))
-;; display just the buffer name
-(setq frame-title-format "%b")
 
 (unless (file-exists-p "~/.emacs.d/config-local.el")
   (copy-file "~/.emacs.d/config-local-template.el"
