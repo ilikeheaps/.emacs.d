@@ -280,8 +280,8 @@
 (require 'ob-sh)
 ;; (org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))
 
-;;Fira Code font
-(when (window-system)
+;;Fira Code font when available
+(when (and (window-system) (font-info "Fira Code"))
   (set-frame-font "Fira Code"))
 
 ;;; titlebar format
