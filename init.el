@@ -177,7 +177,8 @@
     (set-key "C-c m" 'magit-status)
     (set-key "C-c l" 'org-store-link)
     (set-key "C-c a" 'org-agenda-list)
-    (set-key "C-c C-s" 'org-cycle-agenda-files)))
+    (set-key "C-c C-s" 'org-cycle-agenda-files)
+    ))
 
 ;(global-set-key (kbd "<muhenkan> t") 'org-cycle-agenda-files)
 
