@@ -49,6 +49,7 @@
  '(fci-rule-color "dim gray")
  '(flycheck-check-syntax-automatically (quote (save mode-enabled)))
  '(global-semantic-highlight-func-mode t)
+ '(haskell-tags-on-save t)
  '(jdee-server-dir "/jar/")
  '(lua-default-application "lua5.3")
  '(mouse-wheel-progressive-speed nil)
@@ -219,7 +220,7 @@
 (let ((my-cabal-path (expand-file-name "~/.cabal/bin")))
   (setenv "PATH" (concat my-cabal-path path-separator (getenv "PATH")))
   (add-to-list 'exec-path my-cabal-path))
-(custom-set-variables '(haskell-tags-on-save t))
+
 ;; speedbar support
 ;; (add-hook 'haskell-mode-hook 'haskell-decl-scan-mode)
 (require 'speedbar)
