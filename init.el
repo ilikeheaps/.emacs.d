@@ -268,9 +268,6 @@
 (require 'ob-sh)
 ;; (org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))
 
-;;Fira Code font when available
-(when (and (window-system) (font-info "Fira Code"))
-  (set-frame-font "Fira Code"))
 ;;; OCaml stuff
 ;; (require 'merlin)
 ;; ^ TODO where should this go to:
@@ -311,6 +308,24 @@
              "~/.emacs.d/config-local.el"
              nil t nil nil))
 (require 'config-local "~/.emacs.d/config-local.el")
+
+(require 'frame)
+(defun setup-frame-hook (frame)
+  "Doc string FRAME."
+  (modify-frame-parameters
+   frame
+   ;; (blink-cursor-alist . '((
+   '((cursor-color . "LightSkyBlue3")
+     (cursor-type . hbar)
+     )
+   )
+   ;; frame (list (cons 'cursor-color "DeepSkyBlue")))
+  ;;Fira Code font when available
+  (when (and (window-system) (font-info "Fira Code"))
+    (set-frame-font "Fira Code")))
+
+(add-hook 'after-make-frame-functions 'setup-frame-hook)
+
 
 (if (window-system)
     ;; IF we are not in a TTY, unbind C-m from RET
