@@ -180,8 +180,8 @@
 
 ;;; very cool line wrap indents
 (add-hook 'visual-line-mode-hook
- (lambda ()
-   (adaptive-wrap-prefix-mode)))
+          'adaptive-wrap-prefix-mode)
+
 ;;; some alternative code:
 ;;(require 'adaptive-wrap)
 ;;
