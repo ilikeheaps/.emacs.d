@@ -43,6 +43,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(company-idle-delay 0.2)
  '(custom-enabled-themes (quote (misterioso)))
  '(cwm-centered-window-width 100)
  '(doc-view-resolution 300)
