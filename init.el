@@ -122,7 +122,17 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-meta-line ((t (:inherit font-lock-comment-face :foreground "dark slate gray")))))
+ '(haskell-debug-newline-face ((t (:background "#f0f0f0" :foreground "dark gray" :weight bold))))
+ '(haskell-debug-trace-number-face ((t (:background "#f5f5f5" :foreground "dark gray" :weight bold))))
+ '(header-line ((t (:background "gray" :foreground "#333333"))))
+ '(org-meta-line ((t (:inherit font-lock-comment-face :foreground "dark slate gray"))))
+ '(powerline-active0 ((t (:inherit mode-line :background "gray44"))))
+ '(powerline-active1 ((t (:inherit mode-line :background "gray34" :foreground "white"))))
+ '(powerline-active2 ((t (:inherit mode-line :background "gray28" :foreground "white"))))
+ '(powerline-inactive0 ((t (:inherit mode-line-inactive :background "gray24"))))
+ '(powerline-inactive1 ((t (:inherit mode-line-inactive :background "gray18"))))
+ '(powerline-inactive2 ((t (:inherit mode-line-inactive :background "grey10"))))
+ '(show-paren-match ((t (:background "dark slate gray")))))
 
 ;; settings for MELPA
 (require 'package)
