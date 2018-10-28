@@ -111,42 +111,7 @@
  '(org-todo-keywords (quote ((sequence "TODO" "WAIT" "DONE"))))
  '(package-selected-packages
    (quote
-    (;; dunno
-     debbugs
-     sublimity
-     ;; important utilities
-     magit ; cool git
-     helm
-     ;; not important utilities
-     sr-speedbar ; quick access to files but doesn't work well
-     undo-tree
-     org-tree-slide
-     ;; visual stuff
-     powerline
-     adaptive-wrap
-     centered-window
-     org-bullets
-     fill-column-indicator
-     powerline
-     ;; programming languages support
-     ediprolog
-     haskell-emacs
-     tuareg ; OCaml stuff
-     markdown-mode
-     sml-mode
-     forth-mode
-     lua-mode
-     elm-mode
-     racket-mode
-     csharp-mode
-     fsharp-mode
-     ;; additions for programming languages
-     rust-playground
-     ;; flycheck stuff
-     flycheck-status-emoji
-     flycheck-rust
-     flycheck-ocaml
-     flycheck-haskell)))
+    (julia-shell julia-repl julia-mode debbugs sublimity magit helm sr-speedbar undo-tree org-tree-slide powerline adaptive-wrap centered-window org-bullets fill-column-indicator powerline ediprolog haskell-emacs tuareg markdown-mode sml-mode forth-mode lua-mode elm-mode racket-mode csharp-mode fsharp-mode rust-playground flycheck-status-emoji flycheck-rust flycheck-ocaml flycheck-haskell)))
  '(semantic-mode t)
  '(tooltip-hide-delay 1200))
 
