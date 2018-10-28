@@ -3,6 +3,9 @@
 ;; No commentary here, flycheck just wanted me to put these sections here
 ;;; Code:
 
+;; TODO
+;; when migrating to Emacs 26, customize header-line-highlight (see how info mode looks)
+
 ;; provides =flet= (and more)
 (eval-when-compile (require 'cl))
 
@@ -194,7 +197,7 @@
 (setq-default indent-tabs-mode nil)
 
 ;;; Haskell mode stuff
-;; tags ~~ M-.
+;; tags ~~ M-. : add hasktags to PATH
 (let ((my-cabal-path (expand-file-name "~/.cabal/bin")))
   (setenv "PATH" (concat my-cabal-path path-separator (getenv "PATH")))
   (add-to-list 'exec-path my-cabal-path))
@@ -291,10 +294,24 @@
     (def-key "C-c C-c" 'merlin-error-reset)))
 (add-hook 'merlin-mode-hook 'merlin-my-keybindings)
 
+;; TODO how to map 'universal-argument to C-l for helm?
+;; this doesn't do it (with helm-major-mode it doesn't work as well)
+;;
+;; (defun my-helm-keybindings ()
+;;   "Keybindings for helm mode."
+;;   (cl-flet* ((def-key (key-str cmd)
+;;                (define-key helm-mode-map (kbd key-str) cmd))
+;;              (undef-key (key-str) (def-key key-str nil)))
+;;     (def-key "C-l" 'universal-argument)
+;;     ))
+;; (add-hook 'helm-mode-hook 'my-helm-keybindings)
+
 (unless (file-exists-p "~/.emacs.d/config-local.el")
   (copy-file "~/.emacs.d/config-local-template.el"
              "~/.emacs.d/config-local.el"
              nil t nil nil))
 (require 'config-local "~/.emacs.d/config-local.el")
+
+;; TODO paren match highlight shadows selection highlight
 
 ;;; init.el ends here
