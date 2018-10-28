@@ -268,6 +268,28 @@
 ;;Fira Code font when available
 (when (and (window-system) (font-info "Fira Code"))
   (set-frame-font "Fira Code"))
+;;; OCaml stuff
+;; (require 'merlin)
+;; ^ TODO where should this go to:
+;; a) disable free variable warning
+;; b) not load the file when not needed
+;; below is a temporary (or not) solution
+
+(defun merlin-my-keybindings ()
+  "Keybindings for merlin minor mode."
+  ;; TODO do I need xref bindings in Merlin mode?
+  (cl-flet* ((def-key (key-str cmd)
+               ;; (defvar merlin-mode-map) ; is this okay?
+               ;; (require 'merlin) ; this doesn't work
+               (define-key merlin-mode-map (kbd key-str) cmd))
+             (undef-key (key-str) (def-key key-str nil)))
+    (undef-key "C-c C-l") ; merlin-locate
+    (undef-key "C-c &")   ; merlin-pop-stack
+    (def-key "M-." 'merlin-locate)
+    (def-key "M-," 'merlin-pop-stack)
+    ;; TODO rebind tuareg-mode: compile from C-c C-c
+    (def-key "C-c C-c" 'merlin-error-reset)))
+(add-hook 'merlin-mode-hook 'merlin-my-keybindings)
 
 (unless (file-exists-p "~/.emacs.d/config-local.el")
   (copy-file "~/.emacs.d/config-local-template.el"
