@@ -114,6 +114,7 @@
    (quote
     (julia-shell julia-repl julia-mode debbugs sublimity magit helm sr-speedbar undo-tree org-tree-slide powerline adaptive-wrap centered-window org-bullets fill-column-indicator powerline ediprolog haskell-emacs tuareg markdown-mode sml-mode forth-mode lua-mode elm-mode racket-mode csharp-mode fsharp-mode rust-playground flycheck-status-emoji flycheck-rust flycheck-ocaml flycheck-haskell)))
  '(semantic-mode t)
+ '(show-paren-style (quote expression))
  '(tooltip-hide-delay 1200))
 
 (custom-set-faces
