@@ -312,6 +312,13 @@
              nil t nil nil))
 (require 'config-local "~/.emacs.d/config-local.el")
 
+(if (window-system)
+    ;; IF we are not in a TTY, unbind C-m from RET
+    (progn
+      (define-key input-decode-map [?\C-m] [C-m])
+      ;; TODO make it local
+      (global-set-key (kbd "<C-m>") 'haskell-process-do-type)))
+
 ;; TODO paren match highlight shadows selection highlight
 
 ;;; init.el ends here
