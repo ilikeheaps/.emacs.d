@@ -303,7 +303,7 @@
     (def-key "M-," 'merlin-pop-stack)
     ;; TODO rebind tuareg-mode: compile from C-c C-c
     (def-key "C-c C-c" 'merlin-error-reset)))
-(add-hook 'merlin-mode-hook 'merlin-my-keybindings)
+(add-hook 'merlin-mode-hook 'merlin-my-keybindings t)
 
 ;; TODO how to map 'universal-argument to C-l for helm?
 ;; this doesn't do it (with helm-major-mode it doesn't work as well)
