@@ -253,7 +253,7 @@
 ;;;; org-mode
 (require 'org)
 ;;; enable pretty bullets
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+(add-hook 'org-mode-hook 'org-bullets-mode)
 
 ;;; prevent org mode from repositioning text when cycling visibility
 (remove-hook 'org-cycle-hook
