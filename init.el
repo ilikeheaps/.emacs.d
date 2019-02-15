@@ -9,7 +9,6 @@
 ;; provides =flet= (and more)
 (eval-when-compile (require 'cl))
 
-
 ;;; titlebar format
 ;; (setq frame-title-format
 ;;      '(multiple-frames "%b" ("" invocation-name "@" system-name " - %b")))
@@ -39,7 +38,8 @@
     ;; rebind universal-argument from C-u
     (set-key "C-l" 'universal-argument)
     (define-key universal-argument-map (kbd "C-l") 'universal-argument-more)
-    (define-key universal-argument-map (kbd "C-u") 'scroll-down-line)))
+    (define-key universal-argument-map (kbd "C-u") 'scroll-down-line))
+  )
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
