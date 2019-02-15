@@ -317,6 +317,32 @@
 ;;     ))
 ;; (add-hook 'helm-mode-hook 'my-helm-keybindings)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; org-mode agenda options                                                ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(progn
+  ;; TODO consider whether this loads code into memory and stuff
+  (require 'org-agenda)
+  ;;open agenda in current window
+  (setq org-agenda-window-setup `current-window)
+  ;;warn me of any deadlines in next 14 days
+  (setq org-deadline-warning-days 14)
+  ;;show me tasks scheduled or due in...
+  (setq org-agenda-span 8) ;; TODO when =7 it show the current week instead of next n days
+  ;;
+  (setq org-agenda-skip-scheduled-if-deadline-is-shown nil)
+  ;;don't give awarning colour to tasks with impending deadlines if they are scheduled to be done
+  ;; (setq org-agenda-skip-deadline-prewarning-if-scheduled 'pre-scheduled)
+  ;;don't show tasks that are scheduled or have deadlines in the normal todo list
+  ;; (setq org-agenda-todo-ignore-deadlines (quote all))
+  ;; (setq org-agenda-todo-ignore-scheduled (quote all))
+  (setq org-agenda-sorting-strategy
+        '((agenda time-up timestamp-up deadline-up priority-down)
+          (todo priority-down category-keep)
+          (tags priority-down category-keep)
+          (search category-keep)))
+  )
+
 (unless (file-exists-p "~/.emacs.d/config-local.el")
   (copy-file "~/.emacs.d/config-local-template.el"
              "~/.emacs.d/config-local.el"
