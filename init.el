@@ -273,12 +273,22 @@
 ;; (org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))
 
 ;;; OCaml stuff
+(let ((opam-share (ignore-errors (car (process-lines "opam" "config" "var" "share")))))
+  (when (and opam-share (file-directory-p opam-share))
+    ;; Register Merlin
+    (add-to-list 'load-path (expand-file-name "emacs/site-lisp" opam-share))
+    (autoload 'merlin-mode "merlin" nil t nil)
+    ;; Automatically start it in OCaml buffers
+    (add-hook 'tuareg-mode-hook 'merlin-mode t)
+    (add-hook 'caml-mode-hook 'merlin-mode t)
+    ;; Use opam switch to lookup ocamlmerlin binary
+    (setq merlin-command 'opam)))
+
 ;; (require 'merlin)
 ;; ^ TODO where should this go to:
 ;; a) disable free variable warning
 ;; b) not load the file when not needed
 ;; below is a temporary (or not) solution
-
 (defun merlin-my-keybindings ()
   "Keybindings for merlin minor mode."
   ;; TODO do I need xref bindings in Merlin mode?
