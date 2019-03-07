@@ -350,6 +350,8 @@
 (require 'config-local "~/.emacs.d/config-local.el")
 
 (require 'frame)
+;; NOTE the selected frame is the old frame!
+;; TODO this isnt triggered for the initial frame! (even of emacsclient)
 (defun setup-frame-hook (frame)
   "Doc string FRAME."
   (modify-frame-parameters
@@ -362,7 +364,10 @@
    ;; frame (list (cons 'cursor-color "DeepSkyBlue")))
   ;;Fira Code font when available
   (when (and (window-system) (font-info "Fira Code"))
-    (set-frame-font "Fira Code")))
+    (set-frame-font "Fira Code" nil (list frame))
+    ))
+(when (window-system)
+  (setup-frame-hook (selected-frame)))
 
 (add-hook 'after-make-frame-functions 'setup-frame-hook)
 
