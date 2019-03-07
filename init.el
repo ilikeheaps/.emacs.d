@@ -343,6 +343,11 @@
           (search category-keep)))
   )
 
+;; company elisp
+(require 'company-elisp)
+(add-to-list 'company-backends 'company-elisp)
+(add-hook 'emacs-lisp-mode-hook 'company-mode)
+
 (unless (file-exists-p "~/.emacs.d/config-local.el")
   (copy-file "~/.emacs.d/config-local-template.el"
              "~/.emacs.d/config-local.el"
