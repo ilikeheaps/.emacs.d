@@ -21,6 +21,10 @@
 ;; Disable toolbar
 (tool-bar-mode 0)
 
+;;; default browser
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "surf")
+
 ;;;; vanilla Emacs global keybinds
 
 (define-prefix-command 'ctrl-o-prefix)
