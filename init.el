@@ -76,6 +76,8 @@ Prefix argument N makes it go N lines down first."
 
 ;;;; vanilla Emacs global keybinds
 
+(put 'narrow-to-region 'disabled nil)
+
 (define-prefix-command 'ctrl-o-prefix)
 (define-prefix-command 'meta-s-prefix)
 
