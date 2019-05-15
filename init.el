@@ -21,8 +21,16 @@
 ;; Disable toolbar
 (tool-bar-mode 0)
 
-;; vanilla Emacs global keybinds
-(flet ((set-key (str fun) (global-set-key (kbd str) fun)))
+;;;; vanilla Emacs global keybinds
+
+(define-prefix-command 'ctrl-o-prefix)
+(define-prefix-command 'meta-s-prefix)
+
+(flet ((set-key (str fun) (global-set-key (kbd str) fun))
+       (three-level (str fun1 fun2 fun3)
+                    (set-key (concat "C-" str) fun1)
+                    (set-key (concat "C-S-" str) fun2)
+                    (set-key (concat "M-" str) fun3)))
   (progn
     ;; Turn on horizontal scrolling with mouse wheel
     (set-key "<mouse-6>" '(lambda ()
