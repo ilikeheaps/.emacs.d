@@ -25,6 +25,55 @@
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "surf")
 
+;;;; custom defined commands
+
+(defun beginning-of-visual-line-1 (&optional n)
+  "Perform 'beginning-of-visual-line (+ N 1)' [N=0 for current line]."
+  (interactive "P")
+  (if (null n) (beginning-of-visual-line)
+    (beginning-of-visual-line (+ n 1))
+    ))
+
+(defun open-eshell ()
+  "Opens a new eshell buffer."
+  (interactive)
+  (eshell t))
+
+(defun extract-window ()
+  "Opens a new frame (with current window) and closes the current window in the old frame."
+  (interactive)
+  ;; TODO check if there is only one window open
+  (make-frame-command)
+  (delete-window))
+
+(defun beginning-of-line-contextual (&optional n)
+  "Move cursor to the beginning of text in line; \
+if the cursor is already there, move it to the beginning of the line.\
+Prefix argument N makes it go N lines down first."
+  (interactive "P")
+  (let ((n (if n (+ n 1) n))
+        (b (point)))
+    (beginning-of-line-text n)
+    (if (eq (point) b) ; I think this won't ever happen when n is nil
+        (beginning-of-line n)))
+  )
+
+;;; stuff for helper function for managing recover-session files
+(defvar regexp-directory-path "/\\([ [:alnum:][:punct:]]*/\\)*")
+
+(defun is-backup-file-path ()
+  "Return whether the cursor is immediately before a path to a backup file (#file#)."
+  (let ((dir regexp-directory-path))
+    (looking-at (concat dir "#[^\n#]*#"))))
+
+(defun try-remove-backup-file-path ()
+  "If the current line begins immediately with a path to a backup file (#file#), remove the whole line.  Otherwise go to the next line."
+  (interactive)
+  (beginning-of-line)
+  (if (is-backup-file-path)
+      (kill-line 1)
+    (forward-line)))
+
 ;;;; vanilla Emacs global keybinds
 
 (define-prefix-command 'ctrl-o-prefix)
@@ -49,6 +98,41 @@
     (set-key "C-e" 'scroll-up-line)
     ;; rebind universal-argument from C-u
     (set-key "C-l" 'universal-argument)
+    (set-key "C-d" 'open-eshell)
+    ;; directions
+    (three-level "f"
+                 'previous-line
+                 'beginning-of-buffer
+                 'backward-sentence)
+    ;; (set-key "C-f" 'previous-line)
+    ;; (set-key "C-S-f" 'beginning-of-buffer)
+    (three-level "s"
+                 'next-line
+                 'end-of-buffer
+                 'forward-sentence)
+    ;; (set-key "C-s" 'next-line)
+    ;; (set-key "C-S-s" 'end-of-buffer)
+    (three-level "r"
+                 'backward-char
+                 'beginning-of-line-contextual
+                 'backward-word)
+    ;; (set-key "C-r" 'backward-char)
+    ;; (set-key "C-S-r" 'beginning-of-line-contextual)
+    (three-level "t"
+                 'forward-char
+                 'end-of-line
+                 'forward-word)
+    ;;(set-key "C-t" 'forward-char)
+    ;;(set-key "C-S-t" 'end-of-line)
+    (set-key "C-a" 'beginning-of-visual-line-1) ; TODO consider C-???-r instead
+    (set-key "C-p" 'isearch-forward)
+    (set-key "C-w" 'isearch-backward)
+    (set-key "C-n" 'kill-region) ; TODO find a better key, n/i look good for indents
+    (set-key "C-o" 'ctrl-o-prefix)
+    (set-key "C-o C-n" 'make-frame-command)
+    (set-key "C-o C-e" 'extract-window)
+    (set-key "<f5>" 'try-remove-backup-file-path)
+
     (define-key universal-argument-map (kbd "C-l") 'universal-argument-more)
     (define-key universal-argument-map (kbd "C-u") 'scroll-down-line))
   )
