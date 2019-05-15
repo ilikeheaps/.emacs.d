@@ -145,6 +145,7 @@ Prefix argument N makes it go N lines down first."
  '(company-idle-delay 0.2)
  '(custom-enabled-themes (quote (misterioso)))
  '(cwm-centered-window-width 100)
+ '(delete-active-region nil)
  '(doc-view-resolution 300)
  '(fci-rule-color "dim gray")
  '(flycheck-check-syntax-automatically (quote (save mode-enabled)))
