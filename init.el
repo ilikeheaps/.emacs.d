@@ -266,17 +266,17 @@ Prefix argument N makes it go N lines down first."
     (set-key "C-c l" 'org-store-link)
     (set-key "C-c a" 'org-agenda-list)
     (set-key "C-c C-s" 'org-cycle-agenda-files)
+
+    ;; helm stuff
+    ;; (require 'helm-config)
+    (set-key "M-x" 'helm-M-x)
+    (set-key "C-x C-f" 'helm-find-files)
     ))
 
 ;(global-set-key (kbd "<muhenkan> t") 'org-cycle-agenda-files)
 
 ;; (require 'smooth-scroll)
 ;; (smooth-scroll-mode t)
-
-;; helm stuff
-; (require 'helm-config)
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
 
 ;;; powerline (this funky status bar)
 ;; (require 'powerline)
