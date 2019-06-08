@@ -178,9 +178,12 @@ Prefix argument N makes it go N lines down first."
  '(lua-default-application "lua5.3")
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
+ '(org-activate-links (quote (bracket angle radio tag date footnote)))
  '(org-agenda-files (quote ("~/Documents/sushi.org")))
+ '(org-agenda-tags-column -100)
  '(org-babel-load-languages (quote ((emacs-lisp . t))))
  '(org-bullets-bullet-list (quote ("●" "◉" "○")))
+ '(org-id-link-to-org-use-id t)
  '(org-structure-template-alist
    (quote
     (("s" "#+BEGIN_SRC ?
@@ -230,6 +233,7 @@ Prefix argument N makes it go N lines down first."
      ("i" "#+INDEX: ?" "#+INDEX: ?")
      ("I" "#+INCLUDE: %file ?" "<include file=%file markup=\"?\">")
      ("html " "#+BEGIN_HTML\\n?\\n#+END_HTML" "<literal style=\\\"html\\\">\\n?\\n</literal>"))))
+ '(org-tags-column -100)
  '(org-todo-keyword-faces (quote (("WAIT" . "dark orange"))))
  '(org-todo-keywords (quote ((sequence "TODO" "WAIT" "DONE"))))
  '(package-selected-packages
