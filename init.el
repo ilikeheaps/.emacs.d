@@ -9,19 +9,19 @@
 ;; provides =flet= (and more)
 (eval-when-compile (require 'cl))
 
-;;; titlebar format
+;;;; titlebar format
 ;; (setq frame-title-format
 ;;      '(multiple-frames "%b" ("" invocation-name "@" system-name " - %b")))
 ;; display just the buffer name
 (setq frame-title-format "%b")
-;; Highlight matching parentheses when the point is on them.
+;;;;; Highlight matching parentheses when the point is on them.
 (show-paren-mode 1)
-;; Disable menubar
+;;;;; Disable menubar
 (menu-bar-mode 0)
-;; Disable toolbar
+;;;;; Disable toolbar
 (tool-bar-mode 0)
 
-;;; default browser
+;;;; default browser
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "surf")
 
@@ -58,7 +58,7 @@ Prefix argument N makes it go N lines down first."
         (beginning-of-line n)))
   )
 
-;;; stuff for helper function for managing recover-session files
+;;;;; stuff for helper function for managing recover-session files
 (defvar regexp-directory-path "/\\([ [:alnum:][:punct:]]*/\\)*")
 
 (defun is-backup-file-path ()
@@ -139,6 +139,7 @@ Prefix argument N makes it go N lines down first."
     (define-key universal-argument-map (kbd "C-u") 'scroll-down-line))
   )
 
+;;;; Some settings
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -240,7 +241,7 @@ Prefix argument N makes it go N lines down first."
  '(powerline-inactive2 ((t (:inherit mode-line-inactive :background "grey10"))))
  '(show-paren-match ((t (:background "dark slate gray")))))
 
-;; settings for MELPA
+;;;; settings for MELPA
 (require 'package)
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
@@ -259,7 +260,7 @@ Prefix argument N makes it go N lines down first."
   (package-refresh-contents))
 (package-install-selected-packages)
 
-;; package-dependent global keybinds
+;;;; package-dependent global keybinds
 (flet ((set-key (str fun) (global-set-key (kbd str) fun)))
   (progn
     (set-key "C-c m" 'magit-status)
@@ -275,22 +276,23 @@ Prefix argument N makes it go N lines down first."
 
 ;(global-set-key (kbd "<muhenkan> t") 'org-cycle-agenda-files)
 
+;;;; smooth-scroll (disabled, didn't really like)
 ;; (require 'smooth-scroll)
 ;; (smooth-scroll-mode t)
 
-;;; powerline (this funky status bar)
+;;;; powerline (this funky status bar)
 ;; (require 'powerline)
 (powerline-default-theme)
 
-;;; enable line wrapping
+;;;; enable line wrapping
 ;; (global-visual-line-mode +1) ; is this +1 different from 1 ?
 (global-visual-line-mode)
 
-;;; very cool line wrap indents
+;;;; very cool line wrap indents
 (add-hook 'visual-line-mode-hook
           'adaptive-wrap-prefix-mode)
 
-;;; some alternative code:
+;;;;; some alternative code:
 ;;(require 'adaptive-wrap)
 ;;
 ;;(with-eval-after-load 'adaptive-wrap
@@ -301,21 +303,21 @@ Prefix argument N makes it go N lines down first."
 ;;    (adaptive-wrap-prefix-mode +1)
 ;;    (diminish 'visual-line-mode)))
 
-;; fuck tabs
+;;;; fuck tabs
 (setq-default indent-tabs-mode nil)
 
-;;; Haskell mode stuff
+;;;; Haskell mode stuff
 ;; tags ~~ M-. : add hasktags to PATH
 (let ((my-cabal-path (expand-file-name "~/.cabal/bin")))
   (setenv "PATH" (concat my-cabal-path path-separator (getenv "PATH")))
   (add-to-list 'exec-path my-cabal-path))
 
-;; speedbar support
+;;;; speedbar support
 ;; (add-hook 'haskell-mode-hook 'haskell-decl-scan-mode)
 (require 'speedbar)
 (speedbar-add-supported-extension ".hs")
 
-;; some magit stuff
+;;;; some magit stuff
 (require 'magit-status)
 (magit-add-section-hook 'magit-status-sections-hook
                         'magit-insert-unpushed-to-upstream
@@ -325,46 +327,46 @@ Prefix argument N makes it go N lines down first."
                         'magit-insert-recent-commits
                         nil t)
 
-;;; Save a list of recent files visited.
+;;;; Save a list of recent files visited.
 ;; (recentf-mode 1)
 
-;;; flycheck
-;; enable flycheck mode
+;;;; flycheck
+;;;;; enable flycheck mode
 (global-flycheck-mode 1)
-;; configure flycheck for Haskell
+;;;;; configure flycheck for Haskell
 (eval-after-load 'flycheck
   '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
-;; flycheck for Rust
+;;;;; flycheck for Rust
 (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 
-;;; enable centered-window mode
+;;;; enable centered-window mode
 ;; (require 'centered-window-mode)
 (when (>= emacs-major-version 25)
   (centered-window-mode t))
 
 ;;;; org-mode
 (require 'org)
-;;; enable pretty bullets
+;;;;; enable pretty bullets
 (add-hook 'org-mode-hook 'org-bullets-mode)
 
-;;; prevent org mode from repositioning text when cycling visibility
+;;;;; prevent org mode from repositioning text when cycling visibility
 (remove-hook 'org-cycle-hook
              #'org-optimize-window-after-visibility-change)
 
-;; time stamp DONE items (CLOSED: ...)
+;;;;; time stamp DONE items (CLOSED: ...)
 (setq org-log-done 'time)
 ;; make a note when closing items
 ; (setq org-log-done 'note)
 
 
-;;; org-babel-execute for Haskell
+;;;;; org-babel-execute for Haskell
 (require 'ob-haskell)
 
-;;; org-babel-execute for bash
+;;;;; org-babel-execute for bash
 (require 'ob-sh)
 ;; (org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))
 
-;;; OCaml stuff
+;;;; OCaml stuff
 (let ((opam-share (ignore-errors (car (process-lines "opam" "config" "var" "share")))))
   (when (and opam-share (file-directory-p opam-share))
     ;; Register Merlin
@@ -397,6 +399,7 @@ Prefix argument N makes it go N lines down first."
     (def-key "C-c C-c" 'merlin-error-reset)))
 (add-hook 'merlin-mode-hook 'merlin-my-keybindings t)
 
+;;;; (WIP) helm keybindings
 ;; TODO how to map 'universal-argument to C-l for helm?
 ;; this doesn't do it (with helm-major-mode it doesn't work as well)
 ;;
@@ -409,9 +412,7 @@ Prefix argument N makes it go N lines down first."
 ;;     ))
 ;; (add-hook 'helm-mode-hook 'my-helm-keybindings)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; org-mode agenda options                                                ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;; org-mode agenda options
 (progn
   ;; TODO consider whether this loads code into memory and stuff
   (require 'org-agenda)
@@ -445,6 +446,8 @@ Prefix argument N makes it go N lines down first."
              "~/.emacs.d/config-local.el"
              nil t nil nil))
 (require 'config-local "~/.emacs.d/config-local.el")
+
+;;;; settings for (newly created) frames
 
 (require 'frame)
 ;; NOTE the selected frame is the old frame!
