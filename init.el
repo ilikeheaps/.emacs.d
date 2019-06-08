@@ -176,6 +176,7 @@ Prefix argument N makes it go N lines down first."
  '(haskell-tags-on-save t)
  '(jdee-server-dir "/jar/")
  '(lua-default-application "lua5.3")
+ '(magit-display-buffer-function (quote magit-display-buffer-same-window-except-diff-v1))
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
  '(org-activate-links (quote (bracket angle radio tag date footnote)))
