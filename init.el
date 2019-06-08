@@ -581,6 +581,12 @@ Prefix argument N makes it go N lines down first."
   (setq org-plantuml-jar-path path))
 (setq plantuml-output-type "png")
 
+;;;; org-babel languages
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((plantuml . t)
+   (emacs-lisp . t)))
 
 
 ;; TODO paren match highlight shadows selection highlight
