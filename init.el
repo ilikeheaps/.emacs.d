@@ -1,10 +1,10 @@
 ;;; init.el --- my Emacs config
 ;;; Commentary:
 ;; No commentary here, flycheck just wanted me to put these sections here
+;;;; TODO list
+;;;;; when migrating to Emacs 26, customize header-line-highlight (see how info mode looks)
 ;;; Code:
 
-;; TODO
-;; when migrating to Emacs 26, customize header-line-highlight (see how info mode looks)
 
 ;; provides =flet= (and more)
 (eval-when-compile (require 'cl))
