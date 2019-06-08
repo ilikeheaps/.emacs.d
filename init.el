@@ -181,7 +181,6 @@ Prefix argument N makes it go N lines down first."
  '(org-agenda-files (quote ("~/Documents/sushi.org")))
  '(org-babel-load-languages (quote ((emacs-lisp . t))))
  '(org-bullets-bullet-list (quote ("●" "◉" "○")))
- '(org-src-fontify-natively t)
  '(org-structure-template-alist
    (quote
     (("s" "#+BEGIN_SRC ?
@@ -423,6 +422,25 @@ Prefix argument N makes it go N lines down first."
 ;;;;; prevent org mode from repositioning text when cycling visibility
 (remove-hook 'org-cycle-hook
              #'org-optimize-window-after-visibility-change)
+
+;;;;; org-src settings
+(setq org-src-fontify-natively t
+      org-src-tab-acts-natively t
+      org-src-strip-leading-and-trailing-blank-lines t)
+
+;; didn't help :(
+;; ;; remove comments from org document for use with export hook
+;; ;; https://emacs.stackexchange.com/questions/22574/orgmode-export-how-to-prevent-a-new-line-for-comment-lines
+;; (defun delete-org-comments (backend)
+;;   (loop for comment in (reverse (org-element-map (org-element-parse-buffer)
+;;                     'comment 'identity))
+;;     do
+;;     (setf (buffer-substring (org-element-property :begin comment)
+;;                 (org-element-property :end comment))
+;;           "")))
+;;
+;; ;; add to export hook
+;; (remove-hook 'org-export-before-processing-hook 'delete-org-comments)
 
 ;;;;; time stamp DONE items (CLOSED: ...)
 (setq org-log-done 'time)
