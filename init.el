@@ -66,13 +66,31 @@ Prefix argument N makes it go N lines down first."
   (let ((dir regexp-directory-path))
     (looking-at (concat dir "#[^\n#]*#"))))
 
-(defun try-remove-backup-file-path ()
-  "If the current line begins immediately with a path to a backup file (#file#), remove the whole line.  Otherwise go to the next line."
+;; just an alias, maybe name different?
+(defun end-of-line-exc (&optional n)
+  "An alias to `(point-at-eol N)`."
+    (point-at-eol n))
+
+(defun end-of-line-p (&optional pos)
+  "Check whether position POS is at the end of current line.  Check current point position if no position is given."
+  (let ((pos (or pos (point))))
+    (eq pos (end-of-line-exc))))
+
+(defun linkify-path-or-kill-line ()
+  "If the current line begins (ignoring leading whitespace) with a path to a backup file (#file#), remove the whole line (includes whitespace-only lines).  Otherwise indent (org-cycle) and wrap with brackets to make into org link and move cursor to the next line."
   (interactive)
   (beginning-of-line)
-  (if (is-backup-file-path)
-      (kill-line 1)
-    (forward-line)))
+  (skip-chars-forward " ")
+  (if (or (is-backup-file-path) (end-of-line-p))
+      (progn (beginning-of-line)
+             (kill-line 1))
+    (progn
+      (org-indent-line)
+      (insert "[[")
+      (end-of-line)
+      (insert "]]")
+      (forward-line)
+      (beginning-of-line))))
 
 ;;;; vanilla Emacs global keybinds
 
@@ -133,7 +151,7 @@ Prefix argument N makes it go N lines down first."
     (set-key "C-o" 'ctrl-o-prefix)
     (set-key "C-o C-n" 'make-frame-command)
     (set-key "C-o C-e" 'extract-window)
-    (set-key "<f5>" 'try-remove-backup-file-path)
+    (set-key "<f5>" 'linkify-path-or-kill-line)
 
     (define-key universal-argument-map (kbd "C-l") 'universal-argument-more)
     (define-key universal-argument-map (kbd "C-u") 'scroll-down-line))
