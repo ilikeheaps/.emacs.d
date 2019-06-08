@@ -479,10 +479,12 @@ Prefix argument N makes it go N lines down first."
 ;;;; settings for (newly created) frames
 
 (require 'frame)
-;; NOTE the selected frame is the old frame!
-;; TODO this isnt triggered for the initial frame! (even of emacsclient)
-(defun setup-frame-hook (frame)
-  "Doc string FRAME."
+
+;; TODO it looks like the very first frame ever doesn't run this
+(defun setup-frame (frame)
+  "Function to perform on every newly created FRAME."
+  ;; just for testing (see TODO above)
+  (print "setup-frame-hook peformed!")
   (modify-frame-parameters
    frame
    ;; (blink-cursor-alist . '((
@@ -490,23 +492,20 @@ Prefix argument N makes it go N lines down first."
      (cursor-type . hbar)
      )
    )
-   ;; frame (list (cons 'cursor-color "DeepSkyBlue")))
+  ;; frame (list (cons 'cursor-color "DeepSkyBlue")))
   ;;Fira Code font when available
   (when (and (window-system) (font-info "Fira Code"))
+    ;; distinguish between <C-m> and RET (GUI only)
+    (define-key input-decode-map [?\C-m] [C-m])
     (set-frame-font "Fira Code" nil (list frame))
     ))
+
 (when (window-system)
-  (setup-frame-hook (selected-frame)))
+  (setup-frame (selected-frame)))
 
-(add-hook 'after-make-frame-functions 'setup-frame-hook)
+(add-hook 'after-make-frame-functions 'setup-frame)
 
 
-(if (window-system)
-    ;; IF we are not in a TTY, unbind C-m from RET
-    (progn
-      (define-key input-decode-map [?\C-m] [C-m])
-      ;; TODO make it local
-      (global-set-key (kbd "<C-m>") 'haskell-process-do-type)))
 
 ;; TODO paren match highlight shadows selection highlight
 
