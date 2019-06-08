@@ -1,4 +1,4 @@
-;;; package --- summary
+;;; init.el --- my Emacs config
 ;;; Commentary:
 ;; No commentary here, flycheck just wanted me to put these sections here
 ;;; Code:
