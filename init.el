@@ -465,7 +465,7 @@ Prefix argument N makes it go N lines down first."
           (search category-keep)))
   )
 
-;; company elisp
+;;;; company elisp
 (require 'company-elisp)
 (add-to-list 'company-backends 'company-elisp)
 (add-hook 'emacs-lisp-mode-hook 'company-mode)
