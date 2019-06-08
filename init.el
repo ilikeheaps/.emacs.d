@@ -248,10 +248,6 @@ Prefix argument N makes it go N lines down first."
  '(haskell-debug-newline-face ((t (:background "#f0f0f0" :foreground "dark gray" :weight bold))))
  '(haskell-debug-trace-number-face ((t (:background "#f5f5f5" :foreground "dark gray" :weight bold))))
  '(header-line ((t (:background "gray" :foreground "#333333"))))
- '(org-level-2 ((t (:inherit outline-3))))
- '(org-level-3 ((t (:inherit outline-2))))
- '(org-level-4 ((t (:inherit outline-5))))
- '(org-level-5 ((t (:inherit outline-4))))
  '(org-meta-line ((t (:inherit font-lock-comment-face :foreground "dark slate gray"))))
  '(powerline-active0 ((t (:inherit mode-line :background "gray44"))))
  '(powerline-active1 ((t (:inherit mode-line :background "gray34" :foreground "white"))))
@@ -260,6 +256,28 @@ Prefix argument N makes it go N lines down first."
  '(powerline-inactive1 ((t (:inherit mode-line-inactive :background "gray18"))))
  '(powerline-inactive2 ((t (:inherit mode-line-inactive :background "grey10"))))
  '(show-paren-match ((t (:background "dark slate gray")))))
+
+
+(require 'outline)
+;; TODO set-face-attribute is supposed to be used internally, what's a good function to use instead?
+(set-face-attribute 'outline-1 nil :foreground "cyan")
+(set-face-attribute 'outline-2 nil :foreground "deep sky blue")
+(set-face-attribute 'outline-3 nil :foreground "chartreuse3")
+(set-face-attribute 'outline-4 nil :foreground "gold2")
+(set-face-attribute 'outline-5 nil :foreground "sandy brown")
+(set-face-attribute 'outline-6 nil :foreground "yellow green")
+(set-face-attribute 'outline-7 nil :foreground "goldenrod")
+(set-face-attribute 'outline-7 nil :foreground "dark orange")
+;; other candidates:
+;; "green yellow" -- very strong
+;; "lime green"
+;; "light sky blue"
+;; "medium purple"
+;; "light slate blue"
+;; "DarkOrange2"
+;; "RoyalBlue1"
+;; "MediumOrchid1"
+;; "VioletRed1"
 
 ;;;; settings for MELPA
 (require 'package)
