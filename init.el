@@ -334,6 +334,8 @@ Prefix argument N makes it go N lines down first."
 ;; (add-hook 'sh-mode-hook 'outline-set-sh-mode-headlines)
 
 ;;;; package-dependent global keybinds
+;; TODO configuration for specific packages could be done with (use-package ... :config ...)
+;;      but it would also make it easier to make overlapping keybinds :c
 (flet ((set-key (str fun) (global-set-key (kbd str) fun)))
   (progn
     (set-key "<C-m>" 'magit-status) ;; NOTE only works in GUI!
@@ -415,6 +417,7 @@ Prefix argument N makes it go N lines down first."
   (require 'flycheck-plantuml)
   (flycheck-plantuml-setup))
 ;;;;; flycheck for Rust
+;; TODO why is this not in eval-after-load above (other flycheck configurations)?
 (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 
 ;;;; enable centered-window mode
