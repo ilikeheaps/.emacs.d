@@ -365,6 +365,10 @@ Prefix argument N makes it go N lines down first."
 ;;;;; configure flycheck for Haskell
 (eval-after-load 'flycheck
   '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
+;;;;; flycheck for plantuml
+(with-eval-after-load 'flycheck
+  (require 'flycheck-plantuml)
+  (flycheck-plantuml-setup))
 ;;;;; flycheck for Rust
 (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 
@@ -504,6 +508,14 @@ Prefix argument N makes it go N lines down first."
   (setup-frame (selected-frame)))
 
 (add-hook 'after-make-frame-functions 'setup-frame)
+
+;;;; plantuml settings (binary etc.)
+
+(require 'plantuml-mode)
+(let ((path (expand-file-name "~/bin/plantuml.jar")))
+  (setq plantuml-jar-path path)
+  (setq org-plantuml-jar-path path))
+(setq plantuml-output-type "png")
 
 
 
