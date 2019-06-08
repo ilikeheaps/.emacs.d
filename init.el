@@ -27,24 +27,13 @@
 
 ;;;; custom defined commands
 
+;;;;; navigation commands
 (defun beginning-of-visual-line-1 (&optional n)
   "Perform 'beginning-of-visual-line (+ N 1)' [N=0 for current line]."
   (interactive "P")
   (if (null n) (beginning-of-visual-line)
     (beginning-of-visual-line (+ n 1))
     ))
-
-(defun open-eshell ()
-  "Opens a new eshell buffer."
-  (interactive)
-  (eshell t))
-
-(defun extract-window ()
-  "Opens a new frame (with current window) and closes the current window in the old frame."
-  (interactive)
-  ;; TODO check if there is only one window open
-  (make-frame-command)
-  (delete-window))
 
 (defun beginning-of-line-contextual (&optional n)
   "Move cursor to the beginning of text in line; \
@@ -91,6 +80,19 @@ Prefix argument N makes it go N lines down first."
       (insert "]]")
       (forward-line)
       (beginning-of-line))))
+
+;;;;; other utility commands
+(defun open-eshell ()
+  "Opens a new eshell buffer."
+  (interactive)
+  (eshell t))
+
+(defun extract-window ()
+  "Opens a new frame (with current window) and closes the current window in the old frame."
+  (interactive)
+  ;; TODO check if there is only one window open
+  (make-frame-command)
+  (delete-window))
 
 ;;;; vanilla Emacs global keybinds
 
