@@ -336,7 +336,8 @@ Prefix argument N makes it go N lines down first."
 ;;;; package-dependent global keybinds
 (flet ((set-key (str fun) (global-set-key (kbd str) fun)))
   (progn
-    (set-key "C-c m" 'magit-status)
+    (set-key "<C-m>" 'magit-status) ;; NOTE only works in GUI!
+    ;; TODO don't use C-c prefix
     (set-key "C-c l" 'org-store-link)
     (set-key "C-c a" 'org-agenda-list)
     (set-key "C-c C-s" 'org-cycle-agenda-files)
