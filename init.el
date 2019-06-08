@@ -342,18 +342,6 @@ Prefix argument N makes it go N lines down first."
 (when (>= emacs-major-version 25)
   (centered-window-mode t))
 
-  ;; (let
-  ;;     ((included '())
-  ;;      (excluded '()))
-  ;;   (cl-letf ; or cl-flet
-  ;;       ((special-buffer-p (buffer)
-  ;;                          (let ((buffname (string-trim (buffer-name buffer))))
-  ;;                            (and buffname
-  ;;                                 (or (string= "*SR-SPEEDBAR*" buffname)
-  ;;                                     (and (string-prefix-p "*" buffname)
-  ;;                                          (not (string= "*scratch*" buffname))))))))
-  ;;     (setq cwm-ignore-buffer-predicates nil))))
-
 ;;;; org-mode
 (require 'org)
 ;;; enable pretty bullets
