@@ -260,6 +260,35 @@ Prefix argument N makes it go N lines down first."
   (package-refresh-contents))
 (package-install-selected-packages)
 
+;;;; Outline minor mode
+(require 'dash)
+(require 'outshine)
+
+;;;;; Enable for all programming modes
+(add-hook 'prog-mode-hook 'outline-minor-mode)
+;;;;; Enable outshine
+(add-hook 'outline-minor-mode-hook 'outshine-mode)
+;;;;;; Custom regexps for major modes
+;; Note that many languages work out of the box (<comment>'*'+ should always work?)
+;;;;;; sh-mode
+;; TODO doesn't work
+;; (defun outline-calculate-sh-mode-level ()
+;;   "Calculate the level of a ##+ headline.  Assume the point is before a proper headline."
+;;   (save-excursion
+;;     (save-match-data
+;;       (forward-char)
+;;       (let ((count 0))
+;;         (while (looking-at "#")
+;;           (setq count (+ count 1))
+;;           (forward-char))
+;;         count))))
+;; (defun outline-set-sh-mode-headlines ()
+;;   "Set outline regex in `sh-mode` to accept ##+ (up to 9 characters giving 8 levels)."
+;;   (setq-local outline-regexp "#[#]\\{1,8\\}")
+;;   (setq-local outline-level 'outline-calculate-sh-mode-level))
+;; (remove-hook 'sh-mode-hook 'outline-set-sh-mode-headlines)
+;; (add-hook 'sh-mode-hook 'outline-set-sh-mode-headlines)
+
 ;;;; package-dependent global keybinds
 (flet ((set-key (str fun) (global-set-key (kbd str) fun)))
   (progn
