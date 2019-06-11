@@ -573,6 +573,7 @@ Prefix argument N makes it go N lines down first."
 (require 'frame)
 
 ;; TODO it looks like the very first frame ever doesn't run this
+;; NOTE see initial-frame-alist
 (defun setup-frame (frame)
   "Function to perform on every newly created FRAME."
   ;; just for testing (see TODO above)
