@@ -377,6 +377,14 @@ Prefix argument N makes it go N lines down first."
 ;; (global-visual-line-mode +1) ; is this +1 different from 1 ?
 (global-visual-line-mode)
 
+;;;; search only visible text
+;; Use M-s i during isearch to change behaviour on the fly
+(setq search-invisible nil)
+;;;;; for org-mode only (not using)
+;; (add-hook 'org-mode-hook
+;;           (lambda ()
+;;             (make-local-variable 'search-invisible)
+;;             (setq search-invisible nil)))
 ;;;; very cool line wrap indents
 (add-hook 'visual-line-mode-hook
           'adaptive-wrap-prefix-mode)
