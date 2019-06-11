@@ -184,6 +184,7 @@ Prefix argument N makes it go N lines down first."
  '(doc-view-resolution 300)
  '(fci-rule-color "dim gray")
  '(flycheck-check-syntax-automatically (quote (save mode-enabled)))
+ '(flycheck-display-errors-function (quote ignore))
  '(global-semantic-highlight-func-mode t)
  '(haskell-tags-on-save t)
  '(jdee-server-dir "/jar/")
