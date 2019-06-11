@@ -94,6 +94,17 @@ Prefix argument N makes it go N lines down first."
   (make-frame-command)
   (delete-window))
 
+(defun clone-indirect-buffer-select (&optional buffer newname norecord)
+  "Make an indirect copy of the specified BUFFER and return it.  If BUFFER is nil, use the current buffer.  NEWNAME and NORECORD arguments are passed to `clone-indirect-buffer` under the hood."
+  (let ((buf (or buffer (current-buffer))))
+    (with-current-buffer buf
+      (clone-indirect-buffer newname nil norecord))))
+
+(defun clone-indirect-buffer-new-frame (&optional buffer)
+  "Make a new frame with an indirect copy of the specified BUFFER.  If called interactively or with nil BUFFER argument, use the current buffer.  Return the new window in the new frame (probably)."
+  (interactive)
+  (display-buffer (clone-indirect-buffer-select buffer) '(display-buffer-pop-up-frame . ())))
+
 ;;;; vanilla Emacs global keybinds
 
 (put 'narrow-to-region 'disabled nil)
@@ -153,6 +164,7 @@ Prefix argument N makes it go N lines down first."
     (set-key "C-o" 'ctrl-o-prefix)
     (set-key "C-o C-n" 'make-frame-command)
     (set-key "C-o C-e" 'extract-window)
+    (set-key "C-o C-i" 'clone-indirect-buffer-new-frame)
     (set-key "<f5>" 'linkify-path-or-kill-line)
 
     (define-key universal-argument-map (kbd "C-l") 'universal-argument-more)
