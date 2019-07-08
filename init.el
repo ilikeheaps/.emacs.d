@@ -483,8 +483,9 @@ Prefix argument N makes it go N lines down first."
 ;;;;; org-babel-execute for Haskell
 (require 'ob-haskell)
 
-;;;;; org-babel-execute for bash
-(require 'ob-sh)
+;;;;; TODO org-babel-execute for bash
+;; this didn't work on a new machine
+;; (require 'ob-sh)
 ;; (org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))
 
 ;;;; OCaml stuff
