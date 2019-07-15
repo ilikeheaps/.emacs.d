@@ -164,7 +164,7 @@ Prefix argument N makes it go N lines down first."
     (set-key "C-o" 'ctrl-o-prefix)
     (set-key "C-o C-n" 'make-frame-command)
     (set-key "C-o C-e" 'extract-window)
-    (set-key "C-o C-i" 'clone-indirect-buffer-new-frame)
+    (set-key "C-o <C-i>" 'clone-indirect-buffer-new-frame)
     (set-key "<f5>" 'linkify-path-or-kill-line)
 
     (define-key universal-argument-map (kbd "C-l") 'universal-argument-more)
@@ -590,6 +590,8 @@ Prefix argument N makes it go N lines down first."
   (when (and (window-system) (font-info "Fira Code"))
     ;; distinguish between <C-m> and RET (GUI only)
     (define-key input-decode-map [?\C-m] [C-m])
+    ;; distinguish between <C-i> and TAB (GUI only)
+    (define-key input-decode-map [?\C-i] [C-i])
     (set-frame-font "Fira Code" nil (list frame))
     ))
 
