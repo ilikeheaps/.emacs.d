@@ -87,6 +87,12 @@ Prefix argument N makes it go N lines down first."
   (interactive)
   (eshell t))
 
+(defun open-info (&optional file-or-node-opt)
+  "Open a new info buffer.  If FILE-OR-NODE-OPT isn't provided, ask interactively for one."
+  (interactive)
+  (let ((file-or-node (or file-or-node-opt (read-string "info node: "))))
+    (info file-or-node (generate-new-buffer (concat "*<info:" file-or-node ">*")))))
+
 (defun extract-window ()
   "Opens a new frame (with current window) and closes the current window in the old frame."
   (interactive)
