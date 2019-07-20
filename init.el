@@ -334,6 +334,7 @@ Prefix argument N makes it go N lines down first."
 ;;;;;; Custom regexps for major modes
 ;; Note that many languages work out of the box (<comment>'*'+ should always work?)
 ;;;;;;; TODO sh-mode
+;; see outline for haskell-mode
 ;; TODO doesn't work
 ;; (defun outline-calculate-sh-mode-level ()
 ;;   "Calculate the level of a ##+ headline.  Assume the point is before a proper headline."
@@ -351,7 +352,24 @@ Prefix argument N makes it go N lines down first."
 ;;   (setq-local outline-level 'outline-calculate-sh-mode-level))
 ;; (remove-hook 'sh-mode-hook 'outline-set-sh-mode-headlines)
 ;; (add-hook 'sh-mode-hook 'outline-set-sh-mode-headlines)
+;;;;;;; TODO haskell-mode
+(defun generic-outline-level (regex-skip regex-count &optional offset)
+  (save-excursion
+    (save-match-data
+      (looking-at regex-skip)
+      (goto-char (match-end 0))
+      (looking-at regex-count)
+      (- (match-end 0) (match-beginning 0) (or offset 0)))))
 
+;; TODO lambda sees dynamic bindings?
+(defun setup-outline-generic (regex-skip regex-count &optional offset)
+  (setq-local outline-regexp (concat regex-skip regex-count))
+  (setq-local outline-level (lambda () (generic-outline-level regex-skip regex-count offset))))
+
+(defun setup-outline-for-haskell ()
+  (setup-outline-generic "--[ ]*" "[*]\\{1,8\\}"))
+
+;; (add-hook 'haskell-mode-hook 'outline-for-haskell-mode)
 ;;;; package-dependent global keybinds
 ;; TODO configuration for specific packages could be done with (use-package ... :config ...)
 ;;      but it would also make it easier to make overlapping keybinds :c
