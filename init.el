@@ -436,6 +436,11 @@ Prefix argument N makes it go N lines down first."
 ;;;; flycheck
 ;;;;; enable flycheck mode
 (global-flycheck-mode 1)
+;;;;; custom flycheck prefix
+(with-eval-after-load 'flycheck
+  (define-key flycheck-mode-map flycheck-keymap-prefix nil)
+  (setq flycheck-keymap-prefix (kbd "C-a C-f"))
+  (define-key flycheck-mode-map flycheck-keymap-prefix flycheck-command-map))
 ;;;;; configure flycheck for Haskell
 (with-eval-after-load 'flycheck
   (add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
