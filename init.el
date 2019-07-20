@@ -333,7 +333,7 @@ Prefix argument N makes it go N lines down first."
 (add-hook 'outline-minor-mode-hook 'outshine-mode)
 ;;;;;; Custom regexps for major modes
 ;; Note that many languages work out of the box (<comment>'*'+ should always work?)
-;;;;;; sh-mode
+;;;;;;; TODO sh-mode
 ;; TODO doesn't work
 ;; (defun outline-calculate-sh-mode-level ()
 ;;   "Calculate the level of a ##+ headline.  Assume the point is before a proper headline."
