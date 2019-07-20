@@ -437,15 +437,15 @@ Prefix argument N makes it go N lines down first."
 ;;;;; enable flycheck mode
 (global-flycheck-mode 1)
 ;;;;; configure flycheck for Haskell
-(eval-after-load 'flycheck
-  '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
+(with-eval-after-load 'flycheck
+  (add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
 ;;;;; flycheck for plantuml
 (with-eval-after-load 'flycheck
   (require 'flycheck-plantuml)
   (flycheck-plantuml-setup))
 ;;;;; flycheck for Rust
-;; TODO why is this not in eval-after-load above (other flycheck configurations)?
-(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+(with-eval-after-load 'flycheck
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 ;;;; enable centered-window mode
 ;; (require 'centered-window-mode)
