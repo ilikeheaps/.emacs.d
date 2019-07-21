@@ -359,8 +359,12 @@ Prefix argument N makes it go N lines down first."
 ;; ensure that selected packages are installed
 (package-initialize)
 (unless package-archive-contents
-  (package-refresh-contents))
+  (package-refresh-contents)
+  (package-install 'use-package))
 (package-install-selected-packages)
+
+;; TODO use use-package https://github.com/jwiegley/use-package
+(require 'use-package)
 
 ;;;; Outline minor mode
 (require 'dash)
