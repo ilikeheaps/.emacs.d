@@ -348,6 +348,7 @@ Prefix argument N makes it go N lines down first."
               proof-general
               racket-mode
               rust-playground
+              scala-mode
               sml-mode
               sr-speedbar
               sublimity
