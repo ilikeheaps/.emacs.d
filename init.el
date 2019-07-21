@@ -257,9 +257,6 @@ Prefix argument N makes it go N lines down first."
  '(org-tags-column -100)
  '(org-todo-keyword-faces (quote (("WAIT" . "dark orange"))))
  '(org-todo-keywords (quote ((sequence "TODO" "WAIT" "DONE"))))
- '(package-selected-packages
-   (quote
-    (flycheck-plantuml plantuml-mode outshine haskell-mode proof-general org julia-repl julia-mode debbugs sublimity magit helm sr-speedbar undo-tree org-tree-slide powerline adaptive-wrap centered-window org-bullets fill-column-indicator powerline ediprolog haskell-emacs tuareg markdown-mode sml-mode forth-mode lua-mode elm-mode racket-mode csharp-mode fsharp-mode rust-playground flycheck-status-emoji flycheck-rust flycheck-ocaml flycheck-haskell)))
  '(semantic-mode t)
  '(show-paren-style (quote expression))
  '(tooltip-hide-delay 1200))
@@ -304,7 +301,7 @@ Prefix argument N makes it go N lines down first."
 ;; "MediumOrchid1"
 ;; "VioletRed1"
 
-;;;; settings for MELPA
+;;;; settings for MELPA and packages
 (require 'package)
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
@@ -316,6 +313,46 @@ Prefix argument N makes it go N lines down first."
 (when (< emacs-major-version 24)
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
+
+;;;;; selected packages
+(setq package-selected-packages
+      (quote (adaptive-wrap
+              centered-window
+              csharp-mode
+              debbugs
+              ediprolog
+              elm-mode
+              fill-column-indicator
+              flycheck-haskell
+              flycheck-ocaml
+              flycheck-plantuml
+              flycheck-rust
+              flycheck-status-emoji
+              forth-mode
+              fsharp-mode
+              haskell-emacs
+              haskell-mode
+              helm
+              julia-mode
+              julia-repl
+              lua-mode
+              magit
+              markdown-mode
+              org
+              org-bullets
+              org-tree-slide
+              outshine
+              plantuml-mode
+              powerline
+              powerline
+              proof-general
+              racket-mode
+              rust-playground
+              sml-mode
+              sr-speedbar
+              sublimity
+              tuareg
+              undo-tree)))
 
 ;; ensure that selected packages are installed
 (package-initialize)
