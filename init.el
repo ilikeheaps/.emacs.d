@@ -268,12 +268,12 @@ Prefix argument N makes it go N lines down first."
  '(haskell-debug-trace-number-face ((t (:background "#f5f5f5" :foreground "dark gray" :weight bold))))
  '(header-line ((t (:background "gray" :foreground "#333333"))))
  '(org-meta-line ((t (:inherit font-lock-comment-face :foreground "dark slate gray"))))
- '(powerline-active0 ((t (:inherit mode-line :background "gray44"))))
- '(powerline-active1 ((t (:inherit mode-line :background "gray34" :foreground "white"))))
- '(powerline-active2 ((t (:inherit mode-line :background "gray28" :foreground "white"))))
- '(powerline-inactive0 ((t (:inherit mode-line-inactive :background "gray24"))))
- '(powerline-inactive1 ((t (:inherit mode-line-inactive :background "gray18"))))
- '(powerline-inactive2 ((t (:inherit mode-line-inactive :background "grey10"))))
+ '(powerline-inactive0 ((t (:inherit mode-line :background "gray44"))))
+ '(powerline-inactive1 ((t (:inherit mode-line :background "gray34" :foreground "white"))))
+ '(powerline-inactive2 ((t (:inherit mode-line :background "gray28" :foreground "white"))))
+ '(powerline-active0 ((t (:inherit mode-line-inactive :background "gray24"))))
+ '(powerline-active1 ((t (:inherit mode-line-inactive :background "gray18"))))
+ '(powerline-active2 ((t (:inherit mode-line-inactive :background "grey10"))))
  '(show-paren-match ((t (:background "dark slate gray")))))
 
 
