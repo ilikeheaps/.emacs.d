@@ -521,18 +521,35 @@ Prefix argument N makes it go N lines down first."
     (def-key "C-c C-c" 'merlin-error-reset)))
 (add-hook 'merlin-mode-hook 'merlin-my-keybindings t)
 
-;;;; (WIP) helm keybindings
-;; TODO how to map 'universal-argument to C-l for helm?
-;; this doesn't do it (with helm-major-mode it doesn't work as well)
-;;
-;; (defun my-helm-keybindings ()
-;;   "Keybindings for helm mode."
-;;   (cl-flet* ((def-key (key-str cmd)
-;;                (define-key helm-mode-map (kbd key-str) cmd))
-;;              (undef-key (key-str) (def-key key-str nil)))
-;;     (def-key "C-l" 'universal-argument)
-;;     ))
-;; (add-hook 'helm-mode-hook 'my-helm-keybindings)
+;;;; helm keybindings
+(with-eval-after-load 'helm
+  (cl-flet* ((def-key (key-str cmd)
+               (define-key helm-map (kbd key-str) cmd))
+             (undef-key (key-str) (def-key key-str nil)))
+    (def-key "C-l" 'universal-argument)
+    (def-key "C-f" 'helm-previous-line)
+    (def-key "C-s" 'helm-next-line)
+    ))
+;; TODO is this part needed?
+(with-eval-after-load 'helm-types
+  (cl-flet* ((def-key (key-str cmd)
+               (define-key helm-generic-files-map (kbd key-str) cmd))
+             (undef-key (key-str) (def-key key-str nil)))
+    (def-key "C-p" 'helm-ff-run-grep)
+    (def-key "C-s" 'helm-next-line)
+    ))
+(with-eval-after-load 'helm-files
+  (cl-flet* ((def-key (key-str cmd)
+               (define-key helm-find-files-map (kbd key-str) cmd))
+             (undef-key (key-str) (def-key key-str nil)))
+    (def-key "C-p" 'helm-ff-run-grep)
+    (def-key "C-s" 'helm-next-line)
+    ))
+
+;;;;; Snippet for checking if bindings are correct
+;; (lookup-key helm-map (kbd "C-s"))
+;; (lookup-key helm-find-files-map (kbd "C-s"))
+;; (lookup-key helm-generic-files-map (kbd "C-s"))
 
 ;;;; org-mode agenda options
 (progn
