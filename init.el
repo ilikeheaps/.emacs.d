@@ -87,6 +87,12 @@ Prefix argument N makes it go N lines down first."
   (interactive)
   (eshell t))
 
+(defun open-info (&optional file-or-node-opt)
+  "Open a new info buffer.  If FILE-OR-NODE-OPT isn't provided, ask interactively for one."
+  (interactive)
+  (let ((file-or-node (or file-or-node-opt (read-string "info node: "))))
+    (info file-or-node (generate-new-buffer (concat "*<info:" file-or-node ">*")))))
+
 (defun extract-window ()
   "Opens a new frame (with current window) and closes the current window in the old frame."
   (interactive)
@@ -164,7 +170,7 @@ Prefix argument N makes it go N lines down first."
     (set-key "C-o" 'ctrl-o-prefix)
     (set-key "C-o C-n" 'make-frame-command)
     (set-key "C-o C-e" 'extract-window)
-    (set-key "C-o C-i" 'clone-indirect-buffer-new-frame)
+    (set-key "C-o <C-i>" 'clone-indirect-buffer-new-frame)
     (set-key "<f5>" 'linkify-path-or-kill-line)
 
     (define-key universal-argument-map (kbd "C-l") 'universal-argument-more)
@@ -177,6 +183,7 @@ Prefix argument N makes it go N lines down first."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(centered-window-mode nil)
  '(company-idle-delay 0.2)
  '(custom-enabled-themes (quote (misterioso)))
  '(cwm-centered-window-width 100)
@@ -251,9 +258,6 @@ Prefix argument N makes it go N lines down first."
  '(org-tags-column -100)
  '(org-todo-keyword-faces (quote (("WAIT" . "dark orange"))))
  '(org-todo-keywords (quote ((sequence "TODO" "WAIT" "DONE"))))
- '(package-selected-packages
-   (quote
-    (scala-mode flycheck-plantuml plantuml-mode outshine haskell-mode proof-general org julia-repl julia-mode debbugs sublimity magit helm sr-speedbar undo-tree org-tree-slide powerline adaptive-wrap centered-window org-bullets fill-column-indicator powerline ediprolog haskell-emacs tuareg markdown-mode sml-mode forth-mode lua-mode elm-mode racket-mode csharp-mode fsharp-mode rust-playground flycheck-status-emoji flycheck-rust flycheck-ocaml flycheck-haskell)))
  '(semantic-mode t)
  '(show-paren-style (quote expression))
  '(tooltip-hide-delay 1200))
@@ -298,7 +302,7 @@ Prefix argument N makes it go N lines down first."
 ;; "MediumOrchid1"
 ;; "VioletRed1"
 
-;;;; settings for MELPA
+;;;; settings for MELPA and packages
 (require 'package)
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
@@ -311,11 +315,55 @@ Prefix argument N makes it go N lines down first."
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 
+;;;;; selected packages
+(setq package-selected-packages
+      (quote (adaptive-wrap
+              centered-window
+              csharp-mode
+              debbugs
+              ediprolog
+              elm-mode
+              fill-column-indicator
+              flycheck-haskell
+              flycheck-ocaml
+              flycheck-plantuml
+              flycheck-rust
+              flycheck-status-emoji
+              forth-mode
+              fsharp-mode
+              haskell-emacs
+              haskell-mode
+              helm
+              julia-mode
+              julia-repl
+              lua-mode
+              magit
+              markdown-mode
+              org
+              org-bullets
+              org-tree-slide
+              outshine
+              plantuml-mode
+              powerline
+              proof-general
+              racket-mode
+              rust-playground
+              scala-mode
+              sml-mode
+              sr-speedbar
+              sublimity
+              tuareg
+              undo-tree)))
+
 ;; ensure that selected packages are installed
 (package-initialize)
 (unless package-archive-contents
-  (package-refresh-contents))
+  (package-refresh-contents)
+  (package-install 'use-package))
 (package-install-selected-packages)
+
+;; TODO use use-package https://github.com/jwiegley/use-package
+(require 'use-package)
 
 ;;;; Outline minor mode
 (require 'dash)
@@ -327,7 +375,8 @@ Prefix argument N makes it go N lines down first."
 (add-hook 'outline-minor-mode-hook 'outshine-mode)
 ;;;;;; Custom regexps for major modes
 ;; Note that many languages work out of the box (<comment>'*'+ should always work?)
-;;;;;; sh-mode
+;;;;;;; TODO sh-mode
+;; see outline for haskell-mode
 ;; TODO doesn't work
 ;; (defun outline-calculate-sh-mode-level ()
 ;;   "Calculate the level of a ##+ headline.  Assume the point is before a proper headline."
@@ -345,7 +394,24 @@ Prefix argument N makes it go N lines down first."
 ;;   (setq-local outline-level 'outline-calculate-sh-mode-level))
 ;; (remove-hook 'sh-mode-hook 'outline-set-sh-mode-headlines)
 ;; (add-hook 'sh-mode-hook 'outline-set-sh-mode-headlines)
+;;;;;;; TODO haskell-mode
+(defun generic-outline-level (regex-skip regex-count &optional offset)
+  (save-excursion
+    (save-match-data
+      (looking-at regex-skip)
+      (goto-char (match-end 0))
+      (looking-at regex-count)
+      (- (match-end 0) (match-beginning 0) (or offset 0)))))
 
+;; TODO lambda sees dynamic bindings?
+(defun setup-outline-generic (regex-skip regex-count &optional offset)
+  (setq-local outline-regexp (concat regex-skip regex-count))
+  (setq-local outline-level (lambda () (generic-outline-level regex-skip regex-count offset))))
+
+(defun setup-outline-for-haskell ()
+  (setup-outline-generic "--[ ]*" "[*]\\{1,8\\}"))
+
+;; (add-hook 'haskell-mode-hook 'outline-for-haskell-mode)
 ;;;; package-dependent global keybinds
 ;; TODO configuration for specific packages could be done with (use-package ... :config ...)
 ;;      but it would also make it easier to make overlapping keybinds :c
@@ -430,16 +496,21 @@ Prefix argument N makes it go N lines down first."
 ;;;; flycheck
 ;;;;; enable flycheck mode
 (global-flycheck-mode 1)
+;;;;; custom flycheck prefix
+(with-eval-after-load 'flycheck
+  (define-key flycheck-mode-map flycheck-keymap-prefix nil)
+  (setq flycheck-keymap-prefix (kbd "C-a C-f"))
+  (define-key flycheck-mode-map flycheck-keymap-prefix flycheck-command-map))
 ;;;;; configure flycheck for Haskell
-(eval-after-load 'flycheck
-  '(add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
+(with-eval-after-load 'flycheck
+  (add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
 ;;;;; flycheck for plantuml
 (with-eval-after-load 'flycheck
   (require 'flycheck-plantuml)
   (flycheck-plantuml-setup))
 ;;;;; flycheck for Rust
-;; TODO why is this not in eval-after-load above (other flycheck configurations)?
-(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
+(with-eval-after-load 'flycheck
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
 ;;;; enable centered-window mode
 ;; (require 'centered-window-mode)
@@ -608,6 +679,8 @@ Prefix argument N makes it go N lines down first."
   (when (and (window-system) (font-info "Fira Code"))
     ;; distinguish between <C-m> and RET (GUI only)
     (define-key input-decode-map [?\C-m] [C-m])
+    ;; distinguish between <C-i> and TAB (GUI only)
+    (define-key input-decode-map [?\C-i] [C-i])
     (set-frame-font "Fira Code" nil (list frame))
     ))
 
