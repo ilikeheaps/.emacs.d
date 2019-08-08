@@ -9,6 +9,9 @@
 ;; provides =flet= (and more)
 (eval-when-compile (require 'cl))
 
+;; NOTE now this makes customize handicapped because the file isn't loaded -- it can't be loaded because it would conflict with this file's customize sections which I don't want to be automatically changed by customize
+(setq custom-file (concat user-emacs-directory "custom.el"))
+
 ;;;; titlebar format
 ;; (setq frame-title-format
 ;;      '(multiple-frames "%b" ("" invocation-name "@" system-name " - %b")))
