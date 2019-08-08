@@ -710,4 +710,9 @@ Prefix argument N makes it go N lines down first."
 
 ;; TODO paren match highlight shadows selection highlight
 
+;;;; show completions of the current key stroke (which-key)
+(use-package which-key
+  :ensure t
+  :config
+  (which-key-mode))
 ;;; init.el ends here
