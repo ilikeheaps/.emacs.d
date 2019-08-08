@@ -720,4 +720,10 @@ Prefix argument N makes it go N lines down first."
   :ensure t
   :init
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
+;;;; colour colour codes (rainbow-mode)
+(use-package rainbow-mode
+  :ensure t
+  :init
+  (add-hook 'prog-mode-hook 'rainbow-mode))
+
 ;;; init.el ends here
