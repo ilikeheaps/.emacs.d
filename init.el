@@ -3,6 +3,7 @@
 ;; No commentary here, flycheck just wanted me to put these sections here
 ;;;; TODO list
 ;;;;; when migrating to Emacs 26, customize header-line-highlight (see how info mode looks)
+;;;;; customize minor modes display
 ;;; Code:
 
 
