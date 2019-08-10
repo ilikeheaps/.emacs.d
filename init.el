@@ -319,54 +319,127 @@ Prefix argument N makes it go N lines down first."
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 
 ;;;;; selected packages
-(setq package-selected-packages
-      (quote (adaptive-wrap
-              centered-window
-              csharp-mode
-              debbugs
-              ediprolog
-              elm-mode
-              fill-column-indicator
-              flycheck-haskell
-              flycheck-ocaml
-              flycheck-plantuml
-              flycheck-rust
-              flycheck-status-emoji
-              forth-mode
-              fsharp-mode
-              haskell-emacs
-              haskell-mode
-              helm
-              julia-mode
-              julia-repl
-              lua-mode
-              magit
-              markdown-mode
-              org
-              org-bullets
-              org-tree-slide
-              outshine
-              plantuml-mode
-              powerline
-              proof-general
-              racket-mode
-              rust-playground
-              scala-mode
-              sml-mode
-              sr-speedbar
-              sublimity
-              tuareg
-              undo-tree)))
-
-;; ensure that selected packages are installed
+;; dropping selected-package, converting to use-package instead
+;;;;;; ensure that use-package is installed
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents)
   (package-install 'use-package))
-(package-install-selected-packages)
 
-;; TODO use use-package https://github.com/jwiegley/use-package
+;; see https://github.com/jwiegley/use-package
 (require 'use-package)
+
+;;;;;; adaptive-wrap
+(use-package adaptive-wrap
+  :demand)
+;;;;;; centered-window
+(use-package centered-window
+  :demand)
+;;;;;; csharp-mode
+(use-package csharp-mode
+  :demand)
+;;;;;; debbugs
+(use-package debbugs
+  :demand)
+;;;;;; ediprolog
+(use-package ediprolog
+  :demand)
+;;;;;; elm-mode
+(use-package elm-mode
+  :demand)
+;;;;;; fill-column-indicator
+(use-package fill-column-indicator
+  :demand)
+;;;;;; flycheck-haskell
+(use-package flycheck-haskell
+  :demand)
+;;;;;; flycheck-ocaml
+(use-package flycheck-ocaml
+  :demand)
+;;;;;; flycheck-plantuml
+(use-package flycheck-plantuml
+  :demand)
+;;;;;; flycheck-rust
+(use-package flycheck-rust
+  :demand)
+;;;;;; flycheck-status-emoji
+(use-package flycheck-status-emoji
+  :demand)
+;;;;;; forth-mode
+(use-package forth-mode
+  :demand)
+;;;;;; fsharp-mode
+(use-package fsharp-mode
+  :demand)
+;;;;;; haskell-emacs
+(use-package haskell-emacs
+  :demand)
+;;;;;; haskell-mode
+(use-package haskell-mode
+  :demand)
+;;;;;; helm
+(use-package helm
+  :demand)
+;;;;;; julia-mode
+(use-package julia-mode
+  :demand)
+;;;;;; julia-repl
+(use-package julia-repl
+  :demand)
+;;;;;; lua-mode
+(use-package lua-mode
+  :demand)
+;;;;;; magit
+(use-package magit
+  :demand)
+;;;;;; markdown-mode
+(use-package markdown-mode
+  :demand)
+;;;;;; org
+(use-package org
+  :demand)
+;;;;;; org-bullets
+(use-package org-bullets
+  :demand)
+;;;;;; org-tree-slide
+(use-package org-tree-slide
+  :demand)
+;;;;;; outshine
+(use-package outshine
+  :demand)
+;;;;;; plantuml-mode
+(use-package plantuml-mode
+  :demand)
+;;;;;; powerline
+(use-package powerline
+  :demand)
+;;;;;; proof-general
+(use-package proof-general
+  :demand)
+;;;;;; racket-mode
+(use-package racket-mode
+  :demand)
+;;;;;; rust-playground
+(use-package rust-playground
+  :demand)
+;;;;;; scala-mode
+(use-package scala-mode
+  :demand)
+;;;;;; sml-mode
+(use-package sml-mode
+  :demand)
+;;;;;; sr-speedbar
+(use-package sr-speedbar
+  :demand)
+;;;;;; sublimity
+(use-package sublimity
+  :demand)
+;;;;;; tuareg
+(use-package tuareg
+  :demand)
+;;;;;; undo-tree
+(use-package undo-tree
+  :demand)
 
 ;;;; Outline minor mode
 (require 'dash)
