@@ -715,7 +715,7 @@ Prefix argument N makes it go N lines down first."
   :ensure t
   :config
   (which-key-mode))
-;;;; colour delimiters (e.g. parens) by depth (rainbwo-delimiters)
+;;;; colour delimiters (e.g. parens) by depth (rainbow-delimiters)
 (use-package rainbow-delimiters
   :ensure t
   :init
