@@ -800,4 +800,7 @@ Prefix argument N makes it go N lines down first."
   :init
   (add-hook 'prog-mode-hook 'rainbow-mode))
 
+;;;; enable dired-find-alternate-file
+(put 'dired-find-alternate-file 'disabled nil)
+
 ;;; init.el ends here
