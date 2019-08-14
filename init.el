@@ -692,11 +692,13 @@ Prefix argument N makes it go N lines down first."
              (undef-key (key-str) (def-key key-str nil)))
     (def-key "C-p" 'helm-ff-run-grep)
     (def-key "C-s" 'helm-next-line)
+    (def-key "C-l" 'universal-argument)
+    (def-key "C-n" 'helm-find-files-up-one-level)
     ))
 
 ;;;;; Snippet for checking if bindings are correct
 ;; (lookup-key helm-map (kbd "C-s"))
-;; (lookup-key helm-find-files-map (kbd "C-s"))
+;; (lookup-key helm-find-files-map (kbd "C-l"))
 ;; (lookup-key helm-generic-files-map (kbd "C-s"))
 
 ;;;; org-mode agenda options
