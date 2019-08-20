@@ -811,7 +811,12 @@ Prefix argument N makes it go N lines down first."
   :ensure t)
 
 ;;;; editing ansible files
-(use-package ansible
+;;;;; yaml major mode
+(use-package yaml-mode
   :ensure t)
-
+;;;;; ansible minor mode
+(use-package ansible
+  :ensure t
+  :init
+  (add-hook 'yaml-mode-hook '(lambda () (ansible 1))))
 ;;; init.el ends here
