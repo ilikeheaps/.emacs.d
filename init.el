@@ -805,4 +805,9 @@ Prefix argument N makes it go N lines down first."
 ;;;; enable dired-find-alternate-file
 (put 'dired-find-alternate-file 'disabled nil)
 
+;;;; poly-org: multiple major modes in org buffers
+;; this will (almost) seamlessly switch between major modes in org buffers depending on the context (code blocks, ...?)
+(use-package poly-org
+  :ensure t)
+
 ;;; init.el ends here
