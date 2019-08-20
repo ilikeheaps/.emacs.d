@@ -810,4 +810,8 @@ Prefix argument N makes it go N lines down first."
 (use-package poly-org
   :ensure t)
 
+;;;; editing ansible files
+(use-package ansible
+  :ensure t)
+
 ;;; init.el ends here
