@@ -819,4 +819,12 @@ Prefix argument N makes it go N lines down first."
   :ensure t
   :init
   (add-hook 'yaml-mode-hook '(lambda () (ansible 1))))
+
+;;;; editing lisp
+(use-package lispy
+  :ensure t
+  :init
+  (add-hook 'lisp-mode-hook 'lispy-mode)
+  (add-hook 'emacs-lisp-mode-hook 'lispy-mode))
+
 ;;; init.el ends here
