@@ -827,4 +827,8 @@ Prefix argument N makes it go N lines down first."
   (add-hook 'lisp-mode-hook 'lispy-mode)
   (add-hook 'emacs-lisp-mode-hook 'lispy-mode))
 
+;;;; edit helm grep results
+(use-package wgrep-helm
+  :ensure t)
+
 ;;; init.el ends here
