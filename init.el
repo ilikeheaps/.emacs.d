@@ -791,6 +791,7 @@ Prefix argument N makes it go N lines down first."
   :ensure t
   :config
   (which-key-mode)
+  (which-key-setup-side-window-right-bottom)
   :bind ("C-h B" . which-key-show-top-level))
 ;;;; colour delimiters (e.g. parens) by depth (rainbow-delimiters)
 (use-package rainbow-delimiters
