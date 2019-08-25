@@ -807,29 +807,29 @@ Prefix argument N makes it go N lines down first."
 ;;;; enable dired-find-alternate-file
 (put 'dired-find-alternate-file 'disabled nil)
 
-;;;; poly-org: multiple major modes in org buffers
+;;;; Use multiple major modes in org buffers (poly-org)
 ;; this will (almost) seamlessly switch between major modes in org buffers depending on the context (code blocks, ...?)
 (use-package poly-org
   :ensure t)
 
 ;;;; editing ansible files
-;;;;; yaml major mode
+;;;;; yaml major mode (yaml-mode)
 (use-package yaml-mode
   :ensure t)
-;;;;; ansible minor mode
+;;;;; ansible minor mode (ansible)
 (use-package ansible
   :ensure t
   :init
   (add-hook 'yaml-mode-hook '(lambda () (ansible 1))))
 
-;;;; editing lisp
+;;;; editing lisp (lispy)
 (use-package lispy
   :ensure t
   :init
   (add-hook 'lisp-mode-hook 'lispy-mode)
   (add-hook 'emacs-lisp-mode-hook 'lispy-mode))
 
-;;;; edit helm grep results
+;;;; edit helm grep results (wgrep-helm)
 (use-package wgrep-helm
   :ensure t)
 
