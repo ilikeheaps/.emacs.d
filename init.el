@@ -271,6 +271,8 @@ Prefix argument N makes it go N lines down first."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(term-color-blue ((t (:foreground "#AA88FF"))))
+ ;; there are also a few other defined terminal colours (8 in total?)
  '(fringe ((t (:background "#1d2733"))))
  '(haskell-debug-newline-face ((t (:background "#f0f0f0" :foreground "dark gray" :weight bold))))
  '(haskell-debug-trace-number-face ((t (:background "#f5f5f5" :foreground "dark gray" :weight bold))))
