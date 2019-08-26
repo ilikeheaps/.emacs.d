@@ -460,9 +460,6 @@ Prefix argument N makes it go N lines down first."
 ;;;;;; rust-playground
 (use-package rust-playground
   :demand)
-;;;;;; scala-mode
-(use-package scala-mode
-  :demand)
 ;;;;;; sml-mode
 (use-package sml-mode
   :demand)
@@ -478,6 +475,30 @@ Prefix argument N makes it go N lines down first."
 ;;;;;; undo-tree
 (use-package undo-tree
   :demand)
+
+;;;; Scala development (scala-mode, sbt-mode, lsp-mode, metals)
+(use-package scala-mode
+  :demand)
+
+(use-package sbt-mode
+  :ensure t
+  :commands sbt-start sbt-command
+  :config
+  (substitute-key-definition
+   'minibuffer-complete-word
+   'self-insert-command
+   minibuffer-local-completion-map))
+
+(use-package lsp-mode
+  :ensure t
+  :hook (scala-mode . lsp)
+  :config (setq lsp-prefer-flymake nil))
+
+(use-package lsp-ui
+  :ensure t)
+
+(use-package company-lsp
+  :ensure t)
 
 ;;;; Outline minor mode
 (require 'dash)
