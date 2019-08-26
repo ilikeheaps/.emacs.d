@@ -383,12 +383,6 @@ Prefix argument N makes it go N lines down first."
 ;;;;;; helm
 (use-package helm
   :demand)
-;;;;;; julia-mode
-(use-package julia-mode
-  :demand)
-;;;;;; julia-repl
-(use-package julia-repl
-  :demand)
 ;;;;;; lua-mode
 (use-package lua-mode
   :demand)
