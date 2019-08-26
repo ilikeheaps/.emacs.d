@@ -12,6 +12,38 @@
 
 ;; NOTE now this makes customize handicapped because the file isn't loaded -- it can't be loaded because it would conflict with this file's customize sections which I don't want to be automatically changed by customize
 (setq custom-file (concat user-emacs-directory "custom.el"))
+;;;; garbage collection settings
+;; For consideration: set gc-threshold absurdly high just for the init script
+;;;;; Variable and function definitions
+(defvar idle-gc-timer nil
+  "Timer object for garbage collection on idle.")
+
+(defun disable-idle-gc ()
+  "Disable garbage collection on idle."
+  (interactive)
+  (when idle-gc-timer
+    (cancel-timer idle-gc-timer)
+    (setq idle-gc-timer nil)))
+
+(defun enable-idle-gc (delay)
+  "Enable garbage collection on idle after DELAY."
+  (interactive)
+  (when idle-gc-timer
+    (disable-idle-gc))
+  (setq idle-gc-timer
+        (run-with-idle-timer
+         delay
+         t
+         (lambda ()
+           ;; just for testing purposes
+           (garbage-collect)))))
+
+;;;;; Actual settings
+(setq garbage-collection-messages t)
+(setq gc-cons-threshold
+      (* 120 1024 1024))
+(enable-idle-gc 1)
+;; (disable-idle-gc)
 
 ;;;; titlebar format
 ;; (setq frame-title-format
