@@ -321,17 +321,15 @@ Prefix argument N makes it go N lines down first."
   ;; For important compatibility libraries like cl-lib
   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 
-;;;;; selected packages
-;; dropping selected-package, converting to use-package instead
-;;;;;; ensure that use-package is installed
+;;;;; ensure that use-package is installed
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents)
   (package-install 'use-package))
-
 ;; see https://github.com/jwiegley/use-package
 (require 'use-package)
 
+;;;; Uncustomized packages (converting from Customize's `selected-packages`)
 ;;;;;; adaptive-wrap
 (use-package adaptive-wrap
   :demand)
