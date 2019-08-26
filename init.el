@@ -329,6 +329,17 @@ Prefix argument N makes it go N lines down first."
 ;; see https://github.com/jwiegley/use-package
 (require 'use-package)
 
+;;;; don't use default auto-mode-alist
+;; So that only modes defined from now on will be bound to extensions.
+(when (not (boundp 'vanilla-auto-mode-alist))
+  (defvar vanilla-auto-mode-alist auto-mode-alist
+    "`auto-mode-alist` as it is in default Emacs.")
+  (setq auto-mode-alist nil))
+
+;;;;; Rebind modes present in vanilla Emacs
+;;;;;; Emacs lisp
+(use-package emacs-lisp-mode
+  :mode "\\.el\\'")
 ;;;; Uncustomized packages (converting from Customize's `selected-packages`)
 ;;;;;; adaptive-wrap
 (use-package adaptive-wrap
