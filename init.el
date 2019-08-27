@@ -15,6 +15,7 @@
 (setq custom-file (concat user-emacs-directory "custom.el"))
 ;;;; garbage collection settings
 ;; For consideration: set gc-threshold absurdly high just for the init script
+;; ~~ after-init-hook
 ;;;;; Variable and function definitions
 (defvar idle-gc-timer nil
   "Timer object for garbage collection on idle.")
