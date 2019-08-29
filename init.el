@@ -216,6 +216,7 @@ Prefix argument N makes it go N lines down first."
   )
 
 ;;;; Some settings
+;; moving away from Customize
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -294,11 +295,13 @@ Prefix argument N makes it go N lines down first."
      ("I" "#+INCLUDE: %file ?" "<include file=%file markup=\"?\">")
      ("html " "#+BEGIN_HTML\\n?\\n#+END_HTML" "<literal style=\\\"html\\\">\\n?\\n</literal>"))))
  '(org-tags-column -100)
- '(org-todo-keyword-faces (quote (("WAIT" . "dark orange"))))
- '(org-todo-keywords (quote ((sequence "TODO" "WAIT" "DONE"))))
  '(semantic-mode t)
  '(show-paren-style (quote expression))
  '(tooltip-hide-delay 1200))
+
+(setq org-todo-keyword-faces '(("WAIT" . "dark orange")
+                               ("FAIL" . "grey")))
+(setq org-todo-keywords '((sequence "TODO(a)" "WAIT(r)" "|" "DONE(s)" "FAIL(t)")))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
