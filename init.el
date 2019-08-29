@@ -308,6 +308,12 @@ Prefix argument N makes it go N lines down first."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ediff-even-diff-A ((t (:background "#343551"))))
+ '(ediff-odd-diff-A ((t (:background "#343551"))))
+ '(ediff-even-diff-B ((t (:background "#343551"))))
+ '(ediff-odd-diff-B ((t (:background "#343551"))))
+ '(ediff-even-diff-C ((t (:background "#343551"))))
+ '(ediff-odd-diff-C ((t (:background "#343551"))))
  '(term-color-blue ((t (:foreground "#AA88FF"))))
  ;; there are also a few other defined terminal colours (8 in total?)
  '(fringe ((t (:background "#1d2733"))))
