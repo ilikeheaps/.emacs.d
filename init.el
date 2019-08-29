@@ -497,7 +497,9 @@ Prefix argument N makes it go N lines down first."
 (use-package lsp-mode
   :ensure t
   :hook (scala-mode . lsp)
-  :config (setq lsp-prefer-flymake nil))
+  :config
+  (setq lsp-prefer-flymake nil)
+  (setq lsp-enable-snippet nil))
 
 (use-package lsp-ui
   :ensure t)
