@@ -314,6 +314,7 @@ Prefix argument N makes it go N lines down first."
  '(ediff-odd-diff-B ((t (:background "#343551"))))
  '(ediff-even-diff-C ((t (:background "#343551"))))
  '(ediff-odd-diff-C ((t (:background "#343551"))))
+ '(lsp-ui-sideline-global ((t (:background "#222235"))))
  '(term-color-blue ((t (:foreground "#AA88FF"))))
  ;; there are also a few other defined terminal colours (8 in total?)
  '(fringe ((t (:background "#1d2733"))))
