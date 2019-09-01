@@ -393,13 +393,13 @@ Prefix argument N makes it go N lines down first."
 ;;;; Uncustomized packages (converting from Customize's `selected-packages`)
 ;;;;;; adaptive-wrap
 (use-package adaptive-wrap
-  :demand)
+  :commands adaptive-wrap-prefix-mode)
 ;;;;;; centered-window
 (use-package centered-window
-  :demand)
+  :commands centered-window-mode)
 ;;;;;; csharp-mode
 (use-package csharp-mode
-  :demand)
+  :mode "\\.cs$")
 ;;;;;; debbugs
 (use-package debbugs
   :demand)
@@ -408,56 +408,49 @@ Prefix argument N makes it go N lines down first."
   :demand)
 ;;;;;; elm-mode
 (use-package elm-mode
-  :demand)
+  :mode "\\.elm\\'"
+  :ensure t)
 ;;;;;; fill-column-indicator
 (use-package fill-column-indicator
-  :demand)
-;;;;;; flycheck-haskell
-(use-package flycheck-haskell
-  :demand)
-;;;;;; flycheck-ocaml
-(use-package flycheck-ocaml
-  :demand)
-;;;;;; flycheck-plantuml
-(use-package flycheck-plantuml
-  :demand)
-;;;;;; flycheck-rust
-(use-package flycheck-rust
-  :demand)
-;;;;;; flycheck-status-emoji
-(use-package flycheck-status-emoji
-  :demand)
+  :commands fci-mode)
 ;;;;;; forth-mode
 (use-package forth-mode
-  :demand)
+  :mode "\\.\\(f\\|fs\\|fth\\|4th\\)\\'")
 ;;;;;; fsharp-mode
 (use-package fsharp-mode
-  :demand)
+  :mode "\\.fs[iylx]?\\'")
 ;;;;;; haskell-emacs
 (use-package haskell-emacs
   :demand)
 ;;;;;; haskell-mode
-(use-package haskell-mode
-  :demand)
+(use-package
+  haskell-mode
+  :mode (("\\.hsc\\'" . haskell-mode)
+         ("\\.l[gh]s\\'" . literate-haskell-mode)
+         ("\\.hsig\\'" . haskell-mode)
+         ("\\.[gh]s\\'" . haskell-mode)
+         ("\\.cabal\\'" . haskell-cabal-mode)))
 ;;;;;; helm
 (use-package helm
   :demand)
 ;;;;;; lua-mode
 (use-package lua-mode
-  :demand)
+  :mode "\\.lua\\'")
 ;;;;;; magit
 (use-package magit
-  :demand)
+  :commands (magit magit-clone magit-init))
 ;;;;;; markdown-mode
+;; TODO? ("\\.markdown\\'" . markdown-mode)
 (use-package markdown-mode
-  :demand)
+  :mode "\\.md\\'")
 ;;;;;; org
 (use-package org
   :demand)
 ;;;;;; org-bullets
 (use-package org-bullets
   :demand)
-;;;;;; org-tree-slide
+;;;;;; TODO org-tree-slide
+;; does this even work?
 (use-package org-tree-slide
   :demand)
 ;;;;;; outshine
@@ -465,7 +458,7 @@ Prefix argument N makes it go N lines down first."
   :demand)
 ;;;;;; plantuml-mode
 (use-package plantuml-mode
-  :demand)
+  :mode "\\.\\(plantuml\\|pum\\|plu\\)\\'")
 ;;;;;; powerline
 (use-package powerline
   :demand)
@@ -474,13 +467,15 @@ Prefix argument N makes it go N lines down first."
   :demand)
 ;;;;;; racket-mode
 (use-package racket-mode
-  :demand)
+  :mode "\\.rkt[dl]?\\'")
 ;;;;;; rust-playground
 (use-package rust-playground
-  :demand)
+  :commands (rust-playground rust-playground-mode))
 ;;;;;; sml-mode
 (use-package sml-mode
-  :demand)
+  :mode (("\\.grm\\'" . sml-yacc-mode)
+         ("\\.cm\\'" . sml-cm-mode)
+         ("\\.s\\(ml\\|ig\\)\\'" . sml-mode)))
 ;;;;;; sr-speedbar
 (use-package sr-speedbar
   :demand)
@@ -496,7 +491,7 @@ Prefix argument N makes it go N lines down first."
 
 ;;;; Scala development (scala-mode, sbt-mode, lsp-mode, metals)
 (use-package scala-mode
-  :demand)
+  :mode "\\.\\(scala\\|sbt\\)\\'")
 
 (use-package sbt-mode
   :ensure t
@@ -649,23 +644,36 @@ Prefix argument N makes it go N lines down first."
 ;; (recentf-mode 1)
 
 ;;;; flycheck
-;;;;; enable flycheck mode
-(global-flycheck-mode 1)
+(use-package flycheck
+  :init (global-flycheck-mode))
+
+;;;;; use emoji for status icons
+(use-package flycheck-status-emoji
+  :demand)
+
 ;;;;; custom flycheck prefix
 (with-eval-after-load 'flycheck
   (define-key flycheck-mode-map flycheck-keymap-prefix nil)
   (setq flycheck-keymap-prefix (kbd "C-a C-f"))
   (define-key flycheck-mode-map flycheck-keymap-prefix flycheck-command-map))
 ;;;;; configure flycheck for Haskell
-(with-eval-after-load 'flycheck
-  (add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
+(use-package flycheck-haskell
+  :hook (flycheck-mode-hook . flycheck-haskell-setup))
+;; (with-eval-after-load 'flycheck
+;;   (add-hook 'flycheck-mode-hook #'flycheck-haskell-setup))
+
 ;;;;; flycheck for plantuml
-(with-eval-after-load 'flycheck
-  (require 'flycheck-plantuml)
-  (flycheck-plantuml-setup))
+(use-package flycheck-plantuml
+  ;; TODO should this be in a hook or just once after loading flycheck?
+  :hook (flycheck-mode-hook . flycheck-plantuml-setup))
+
 ;;;;; flycheck for Rust
-(with-eval-after-load 'flycheck
-  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
+(use-package flycheck-rust
+  :hook (flycheck-mode-hook . flycheck-rust-setup))
+
+;;;;; flycheck for OCaml
+(use-package flycheck-ocaml
+  :demand)
 
 ;;;; enable centered-window mode
 ;; (require 'centered-window-mode)
@@ -888,11 +896,13 @@ Prefix argument N makes it go N lines down first."
 ;;;; Use multiple major modes in org buffers (poly-org)
 ;; this will (almost) seamlessly switch between major modes in org buffers depending on the context (code blocks, ...?)
 (use-package poly-org
+  :mode ("\\.org\\'" . poly-org-mode)
   :ensure t)
 
 ;;;; editing ansible files
 ;;;;; yaml major mode (yaml-mode)
 (use-package yaml-mode
+  :mode "\\.\\(e?ya?\\|ra\\)ml\\'"
   :ensure t)
 ;;;;; ansible minor mode (ansible)
 (use-package ansible
