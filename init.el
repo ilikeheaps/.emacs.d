@@ -5,6 +5,8 @@
 ;;;;; when migrating to Emacs 26, customize header-line-highlight (see how info mode looks)
 ;;;;; customize minor modes display
 ;;;;; lispy mode seems to assume wrong outline format
+;;;;; use-package: use delight or diminish
+;;;;; use-package: check for more cool stuff (key chords? system packages?)
 ;;; Code:
 
 
