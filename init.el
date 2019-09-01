@@ -463,6 +463,7 @@ Prefix argument N makes it go N lines down first."
 (use-package powerline
   :demand)
 ;;;;;; proof-general
+;; TODO auto mode alist entry?
 (use-package proof-general
   :demand)
 ;;;;;; racket-mode
@@ -631,6 +632,7 @@ Prefix argument N makes it go N lines down first."
 (speedbar-add-supported-extension ".hs")
 
 ;;;; some magit stuff
+;; TODO this is slow -- defer?
 (require 'magit-status)
 (magit-add-section-hook 'magit-status-sections-hook
                         'magit-insert-unpushed-to-upstream
