@@ -374,6 +374,9 @@ Prefix argument N makes it go N lines down first."
   (package-install 'use-package))
 ;; see https://github.com/jwiegley/use-package
 (require 'use-package)
+;;;;; setup use-package
+;; (require 'use-package-always-ensure) ; TODO is this needed?
+(setq use-package-always-ensure t)
 
 ;;;; don't use default auto-mode-alist
 ;; So that only modes defined from now on will be bound to extensions.
@@ -385,6 +388,7 @@ Prefix argument N makes it go N lines down first."
 ;;;;; Rebind modes present in vanilla Emacs
 ;;;;;; Emacs lisp
 (use-package emacs-lisp-mode
+  :ensure nil
   :mode "\\.el\\'")
 ;;;; Uncustomized packages (converting from Customize's `selected-packages`)
 ;;;;;; adaptive-wrap
