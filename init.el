@@ -43,7 +43,7 @@
            (garbage-collect)))))
 
 ;;;;; Actual settings
-(setq garbage-collection-messages t)
+(setq garbage-collection-messages nil)
 (setq gc-cons-threshold
       (* 120 1024 1024))
 (enable-idle-gc 1)
