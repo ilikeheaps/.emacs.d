@@ -923,4 +923,9 @@ Prefix argument N makes it go N lines down first."
 (use-package wgrep-helm
   :ensure t)
 
+;;;; edit csv files (csv-mode)
+(use-package csv-mode
+  :ensure t
+  :mode "\\.csv\\'")
+
 ;;; init.el ends here
