@@ -926,6 +926,7 @@ Prefix argument N makes it go N lines down first."
 ;;;; edit csv files (csv-mode)
 (use-package csv-mode
   :ensure t
-  :mode "\\.csv\\'")
+  :mode "\\.csv\\'"
+  :config (add-hook 'csv-mode-hook (lambda () (toggle-truncate-lines 1))))
 
 ;;; init.el ends here
