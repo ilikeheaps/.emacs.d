@@ -505,7 +505,28 @@ Prefix argument N makes it go N lines down first."
 (use-package lsp-mode
   :ensure t
   :hook (scala-mode . lsp)
+  :bind (:map lsp-mode-map
+              ("M-." . my-lsp-find-definition)
+              ("M-," . my-lsp-history-pop))
   :config
+  (defvar my-lsp-history nil
+    "History of lsp navigation jumps.")
+
+  (defun my-lsp-find-definition ()
+    "`lsp-find-definition` but keeping position in a dedicated stack"
+    (interactive)
+    (push (cons (point) (current-buffer)) my-lsp-history)
+    (lsp-find-definition))
+
+  (defun my-lsp-history-pop ()
+    "Return to the position before the previous jump."
+    (interactive)
+    (if my-lsp-history
+        (let ((pos (pop my-lsp-history)))
+          (switch-to-buffer (cdr pos))
+          (goto-char (car pos)))
+      (message "There is no more history")))
+
   (setq lsp-prefer-flymake nil)
   (setq lsp-enable-snippet nil))
 
