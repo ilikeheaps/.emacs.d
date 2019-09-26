@@ -442,9 +442,10 @@ Prefix argument N makes it go N lines down first."
 ;; TODO? ("\\.markdown\\'" . markdown-mode)
 (use-package markdown-mode
   :mode "\\.md\\'")
-;;;;;; org
+;;;;;; org-mode
 (use-package org
-  :demand)
+  :mode ("\\.org\\'" . org-mode)
+  :ensure t)
 ;;;;;; org-bullets
 (use-package org-bullets
   :demand)
@@ -922,7 +923,9 @@ Prefix argument N makes it go N lines down first."
 ;;;; Use multiple major modes in org buffers (poly-org)
 ;; this will (almost) seamlessly switch between major modes in org buffers depending on the context (code blocks, ...?)
 (use-package poly-org
-  :mode ("\\.org\\'" . poly-org-mode)
+  :commands poly-org-mode
+  ;; it becomes a bit laggy in somewhat big files (like my personal .org)
+  ;; :mode ("\\.org\\'" . poly-org-mode)
   :ensure t)
 
 ;;;; editing ansible files
