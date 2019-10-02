@@ -231,8 +231,6 @@ Prefix argument N makes it go N lines down first."
  '(delete-active-region nil)
  '(doc-view-resolution 300)
  '(fci-rule-color "dim gray")
- '(flycheck-check-syntax-automatically (quote (save mode-enabled)))
- '(flycheck-display-errors-function (quote ignore))
  '(global-semantic-highlight-func-mode t)
  '(haskell-tags-on-save t)
  '(jdee-server-dir "/jar/")
@@ -668,7 +666,10 @@ Prefix argument N makes it go N lines down first."
 
 ;;;; flycheck
 (use-package flycheck
-  :init (global-flycheck-mode))
+  :init (global-flycheck-mode)
+  :config
+  (setq flycheck-check-syntax-automatically '(save mode-enabled idle-buffer-switch)
+        flycheck-display-errors-function nil))
 
 ;;;;; use emoji for status icons
 (use-package flycheck-status-emoji
