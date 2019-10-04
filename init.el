@@ -510,11 +510,14 @@ Prefix argument N makes it go N lines down first."
   :config
   (defvar my-lsp-history nil
     "History of lsp navigation jumps.")
+  (defvar my-lsp-history-size 0
+    "Size of `my-lsp-history`.")
 
   (defun my-lsp-find-definition ()
     "`lsp-find-definition` but keeping position in a dedicated stack"
     (interactive)
     (push (cons (point) (current-buffer)) my-lsp-history)
+    (cl-incf my-lsp-history-size)
     (lsp-find-definition))
 
   (defun my-lsp-history-pop ()
@@ -523,8 +526,16 @@ Prefix argument N makes it go N lines down first."
     (if my-lsp-history
         (let ((pos (pop my-lsp-history)))
           (switch-to-buffer (cdr pos))
-          (goto-char (car pos)))
+          (goto-char (car pos))
+          (cl-decf my-lsp-history-size)
+          (message   "History stack size: %d" my-lsp-history-size))
       (message "There is no more history")))
+
+  (defun my-lsp-clear-stack ()
+    "Clear (my-)lsp jump history."
+    (interactive)
+    (setq my-lsp-history nil)
+    (setq my-lsp-history-size 0))
 
   (setq lsp-prefer-flymake nil)
   (setq lsp-enable-snippet nil))
