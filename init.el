@@ -387,6 +387,10 @@ Prefix argument N makes it go N lines down first."
 (use-package emacs-lisp-mode
   :ensure nil
   :mode "\\.el\\'")
+;;;;;; C
+(use-package cc-mode
+  :ensure nil
+  :mode ("\\.[ch]\\'" . c-mode))
 ;;;; Uncustomized packages (converting from Customize's `selected-packages`)
 ;;;;;; adaptive-wrap
 (use-package adaptive-wrap
