@@ -813,9 +813,12 @@ Prefix argument N makes it go N lines down first."
   )
 
 ;;;; company elisp
-(require 'company-elisp)
-(add-to-list 'company-backends 'company-elisp)
-(add-hook 'emacs-lisp-mode-hook 'company-mode)
+(use-package company
+  :commands (company-mode)
+  :config
+  (add-to-list 'company-backends 'company-elisp)
+  :init
+  (add-hook 'emacs-lisp-mode-hook 'company-mode))
 
 ;;;; local config
 (unless (file-exists-p "~/.emacs.d/config-local.el")
