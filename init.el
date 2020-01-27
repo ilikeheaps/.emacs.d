@@ -15,6 +15,11 @@
 
 ;; NOTE now this makes customize handicapped because the file isn't loaded -- it can't be loaded because it would conflict with this file's customize sections which I don't want to be automatically changed by customize
 (setq custom-file (concat user-emacs-directory "custom.el"))
+;;;; disable interlock (.#file) and backup (file~) files
+;; I'm the only user and only use one instance (emacs --daemon) so it's not needed and some tools bug out due to unexpected files (like bloop)
+(setq create-lockfiles nil)
+
+(setq make-backup-files nil)
 ;;;; garbage collection settings
 ;; For consideration: set gc-threshold absurdly high just for the init script
 ;; ~~ after-init-hook
