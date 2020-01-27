@@ -222,6 +222,9 @@ Prefix argument N makes it go N lines down first."
     (define-key universal-argument-map (kbd "C-u") 'scroll-down-line))
   )
 
+;;;; smerge keymap prefix
+;; this didn't work but now does???
+(setq smerge-command-prefix (kbd "C-a C-s"))
 ;;;; Some settings
 ;; moving away from Customize
 (custom-set-variables
