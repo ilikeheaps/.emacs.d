@@ -1,4 +1,4 @@
-;;; init.el --- my Emacs config
+;;; init.el --- my Emacs config -*- lexical-binding: t -*-
 ;;; Commentary:
 ;; No commentary here, flycheck just wanted me to put these sections here
 ;;;; TODO list
