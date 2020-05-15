@@ -586,9 +586,11 @@ Prefix argument N makes it go N lines down first."
   (setq-local outline-level (lambda () (generic-outline-level regex-skip regex-count offset))))
 
 (defun setup-outline-for-haskell ()
-  (setup-outline-generic "--[ ]*" "[*]\\{1,8\\}"))
+  (setup-outline-generic "--[ ]*" "[*]\\{1,8\\}")
+  (outline-minor-mode ))
 
-;; (add-hook 'haskell-mode-hook 'outline-for-haskell-mode)
+;; this probably doesn't work because of outshine-mode
+;; (add-hook 'haskell-mode-hook 'setup-outline-for-haskell)
 ;;;; package-dependent global keybinds
 ;; TODO configuration for specific packages could be done with (use-package ... :config ...)
 ;;      but it would also make it easier to make overlapping keybinds :c
