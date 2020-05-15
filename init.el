@@ -933,8 +933,9 @@ Prefix argument N makes it go N lines down first."
 (use-package which-key
   :ensure t
   :config
-  (which-key-mode)
   (which-key-setup-side-window-right-bottom)
+  :init
+  (which-key-mode)
   :bind ("C-h B" . which-key-show-top-level))
 ;;;; colour delimiters (e.g. parens) by depth (rainbow-delimiters)
 (use-package rainbow-delimiters
