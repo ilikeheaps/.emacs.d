@@ -15,6 +15,7 @@
 
 ;; NOTE now this makes customize handicapped because the file isn't loaded -- it can't be loaded because it would conflict with this file's customize sections which I don't want to be automatically changed by customize
 (setq custom-file (concat user-emacs-directory "custom.el"))
+
 ;;;; disable interlock (.#file) and backup (file~) files
 ;; I'm the only user and only use one instance (emacs --daemon) so it's not needed and some tools bug out due to unexpected files (like bloop)
 (setq create-lockfiles nil)
@@ -559,10 +560,10 @@ Prefix argument N makes it go N lines down first."
 ;; (remove-hook 'sh-mode-hook 'outline-set-sh-mode-headlines)
 ;; (add-hook 'sh-mode-hook 'outline-set-sh-mode-headlines)
 ;;;;;;; TODO haskell-mode
-(defun generic-outline-level (regex-skip regex-count &optional offset)
+(defun generic-outline-level (regexp-skip regex-count &optional offset)
   (save-excursion
     (save-match-data
-      (looking-at regex-skip)
+      (looking-at regexp-skip)
       (goto-char (match-end 0))
       (looking-at regex-count)
       (- (match-end 0) (match-beginning 0) (or offset 0)))))
