@@ -4,6 +4,12 @@
 ;;;; TODO list
 ;;;;; when migrating to Emacs 26, customize header-line-highlight (see how info mode looks)
 ;;;;; customize minor modes display
+;;;;; outline minor mode doesn't work properly (maybe because of outshine?)
+;; Problems
+;; - can't hide/show subtree
+;; - can't edit as org (outorg-...)
+;;
+;; Quite possibly heading regexp doesn't work at some point (note how M-RET makes ";;*")
 ;;;;; lispy mode seems to assume wrong outline format
 ;;;;; use-package: use delight or diminish
 ;;;;; use-package: check for more cool stuff (key chords? system packages?)
@@ -392,6 +398,7 @@ Prefix argument N makes it go N lines down first."
   (setq auto-mode-alist nil))
 
 ;;;;; Rebind modes present in vanilla Emacs
+;; Maybe should just set them manually, without use-package
 ;;;;;; Emacs lisp
 (use-package emacs-lisp-mode
   :ensure nil
@@ -753,6 +760,7 @@ Prefix argument N makes it go N lines down first."
   (require 'org-id)
   (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id))
 
+;;;;; something not working
 ;; didn't help :(
 ;; ;; remove comments from org document for use with export hook
 ;; ;; https://emacs.stackexchange.com/questions/22574/orgmode-export-how-to-prevent-a-new-line-for-comment-lines
@@ -884,6 +892,8 @@ Prefix argument N makes it go N lines down first."
 (require 'frame)
 
 ;; TODO it looks like the very first frame ever doesn't run this
+;;    * it does but (window-system) returns nil at the time
+;;    * (display-graphic-p) doesn't work as well
 ;; NOTE see initial-frame-alist
 (defun setup-frame (frame)
   "Function to perform on every newly created FRAME."
@@ -906,6 +916,7 @@ Prefix argument N makes it go N lines down first."
     (set-frame-font "Fira Code" nil (list frame))
     ))
 
+;; this is for running emacs without daemon
 (when (window-system)
   (setup-frame (selected-frame)))
 
