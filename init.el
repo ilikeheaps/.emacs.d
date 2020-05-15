@@ -942,7 +942,7 @@ Prefix argument N makes it go N lines down first."
 (when (window-system)
   (setup-frame (selected-frame)))
 
-(add-hook 'after-make-frame-functions 'setup-frame)
+(add-hook 'after-make-frame-functions 'setup-frame t)
 
 ;;;; plantuml settings (binary etc.)
 
