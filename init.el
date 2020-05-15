@@ -453,10 +453,6 @@ Prefix argument N makes it go N lines down first."
 ;; TODO? ("\\.markdown\\'" . markdown-mode)
 (use-package markdown-mode
   :mode "\\.md\\'")
-;;;;;; org-mode
-(use-package org
-  :mode ("\\.org\\'" . org-mode)
-  :ensure t)
 ;;;;;; org-bullets
 (use-package org-bullets
   :demand)
@@ -700,18 +696,62 @@ Prefix argument N makes it go N lines down first."
   (centered-window-mode t))
 
 ;;;; org-mode
-(require 'org)
+(use-package org
+  :mode ("\\.org\\'" . org-mode)
+  :ensure t
+  :config
+;;;;; TODO custom keymap
+  (defvar old-org-mode-map nil)
+  (setq old-org-mode-map (if (not old-org-mode-map) org-mode-map old-org-mode-map))
+  (setq org-mode-map (make-sparse-keymap))
+  (define-key org-mode-map "tab" 'org-cycle)
+  (define-key org-mode-map "\t" 'org-cycle)
+  (define-key org-mode-map (kbd "<backtab>") 'org-shifttab)
+  (define-key org-mode-map (kbd "C-S-e") 'org-shiftcontroldown)
+  (define-key org-mode-map (kbd "C-S-u") 'org-shiftcontrolup)
+  (define-key org-mode-map (kbd "C-S-n") 'org-shiftcontrolleft)
+  (define-key org-mode-map (kbd "C-S-i") 'org-shiftcontrolright)
+
+  (define-key org-mode-map (kbd "S-e") 'org-shiftdown)
+  (define-key org-mode-map (kbd "S-u") 'org-shiftup)
+  (define-key org-mode-map (kbd "S-n") 'org-shiftleft)
+  (define-key org-mode-map (kbd "S-i") 'org-shiftright)
+
+  (define-key org-mode-map (kbd "M-S-e") 'org-shiftmetadown)
+  (define-key org-mode-map (kbd "M-S-u") 'org-shiftmetaup)
+  (define-key org-mode-map (kbd "M-S-n") 'org-shiftmetaleft)
+  (define-key org-mode-map (kbd "M-S-i") 'org-shiftmetaright)
+
+  (define-key org-mode-map (kbd "M-e") 'org-metadown)
+  (define-key org-mode-map (kbd "M-u") 'org-metaup)
+  (define-key org-mode-map (kbd "M-n") 'org-metaleft)
+  (define-key org-mode-map (kbd "M-i") 'org-metaright)
+
+  (define-key org-mode-map (kbd "C-<ret>") 'org-insert-heading-respect-content)
+  (define-key org-mode-map (kbd "M-<ret>") 'org-meta-return)
+  (define-key org-mode-map (kbd "M-S-<ret>") 'org-meta-return)
 ;;;;; enable pretty bullets
-(add-hook 'org-mode-hook 'org-bullets-mode)
-
+  (add-hook 'org-mode-hook 'org-bullets-mode)
 ;;;;; prevent org mode from repositioning text when cycling visibility
-(remove-hook 'org-cycle-hook
-             #'org-optimize-window-after-visibility-change)
-
+  (remove-hook 'org-cycle-hook
+               #'org-optimize-window-after-visibility-change)
+;;;;; customize org agenda grid
+  (setq org-agenda-time-grid
+        `((daily today require-timed remove-match)
+          #("----------------" 0 16 (org-heading t))
+          ,(map 'list (lambda (x) (* 100 x)) (number-sequence 8 20))))
 ;;;;; org-src settings
-(setq org-src-fontify-natively t
-      org-src-tab-acts-natively t
-      org-src-strip-leading-and-trailing-blank-lines t)
+  (setq org-src-fontify-natively t
+        org-src-tab-acts-natively t
+        org-src-strip-leading-and-trailing-blank-lines t)
+;;;;; time stamp DONE items (CLOSED: ...)
+  (setq org-log-done 'time)
+  ;; make a note when closing items
+  ;; (setq org-log-done 'note)
+
+;;;;; org-id -- insert CUSTOM_ID when creating links
+  (require 'org-id)
+  (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id))
 
 ;; didn't help :(
 ;; ;; remove comments from org document for use with export hook
@@ -726,12 +766,6 @@ Prefix argument N makes it go N lines down first."
 ;;
 ;; ;; add to export hook
 ;; (remove-hook 'org-export-before-processing-hook 'delete-org-comments)
-
-;;;;; time stamp DONE items (CLOSED: ...)
-(setq org-log-done 'time)
-;; make a note when closing items
-; (setq org-log-done 'note)
-
 
 ;;;;; org-babel-execute for Haskell
 (require 'ob-haskell)
