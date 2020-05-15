@@ -13,6 +13,7 @@
 ;;;;; lispy mode seems to assume wrong outline format
 ;;;;; use-package: use delight or diminish
 ;;;;; use-package: check for more cool stuff (key chords? system packages?)
+;;;;; setting local variables while adhering to checkdoc is ugly
 ;;; Code:
 
 
