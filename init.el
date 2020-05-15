@@ -794,8 +794,16 @@ Prefix argument N makes it go N lines down first."
 
 ;;;;; TODO org-babel-execute for bash
 ;; this didn't work on a new machine
-;; (require 'ob-sh)
-;; (org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))
+;; > (require 'ob-sh)
+;; > (org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))
+;; maybe this will work?
+;; I don't think so
+;; > (use-package ob-sh
+;; >   :config
+;; >   (org-babel-do-load-languages 'org-babel-load-languages '((sh . t))))
+(org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))
+
+
 
 ;;;; OCaml stuff
 (let ((opam-share (ignore-errors (car (process-lines "opam" "config" "var" "share")))))
