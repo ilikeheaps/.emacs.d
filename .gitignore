@@ -11,3 +11,6 @@ tramp
 # I'm not sure if this one isn't needed
 opam-user-setup.el
 config-local.el
+.lsp-session-v1
+.org-id-locations
+
