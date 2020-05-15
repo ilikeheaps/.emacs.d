@@ -667,6 +667,9 @@ Prefix argument N makes it go N lines down first."
 (magit-add-section-hook 'magit-status-sections-hook
                         'magit-insert-recent-commits
                         nil t)
+(magit-add-section-hook 'magit-status-sections-hook
+                        'magit-insert-modules
+                        nil t)
 
 ;;;; Save a list of recent files visited.
 ;; (recentf-mode 1)
