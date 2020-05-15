@@ -455,7 +455,9 @@ Prefix argument N makes it go N lines down first."
   :mode "\\.lua\\'")
 ;;;;;; magit
 (use-package magit
-  :commands (magit magit-clone magit-init))
+  :commands (magit magit-clone magit-init)
+  :config
+  (setq magit-log-margin '(t "%F %H:%M" magit-log-margin-width t 18)))
 ;;;;;; markdown-mode
 ;; TODO? ("\\.markdown\\'" . markdown-mode)
 (use-package markdown-mode
