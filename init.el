@@ -986,4 +986,37 @@ Prefix argument N makes it go N lines down first."
   :mode "\\.csv\\'"
   :config (add-hook 'csv-mode-hook (lambda () (toggle-truncate-lines 1))))
 
+;;;; Formatting for some programs output
+
+(defun my-newline-indent (n)
+  "Newline, indent by N and skip one character."
+  (insert "\n")
+  (indent-to n)
+  (forward-char))
+
+(defun my-newline-indent-char (n)
+  "Newline, indent by N and skip one character.  Also insert a space after the character if it's not present."
+  (my-newline-indent n)
+  (when (not (eq (following-char) ?\ ))
+    (insert " ")))
+
+(defun my-format-stuff (&optional level step)
+  "Format parentheses and comma-based structure into separate lines.  Indent starting from (* LEVEL STEP) and increase by STEP."
+  (interactive)
+  (when (not level)
+    (setq level -1))
+  (when (not step)
+    (setq step 2))
+  (while (search-forward-regexp "[,()\n ]")
+    (backward-char)
+    (case (following-char)
+      (?\  (just-one-space))
+      (?\n (delete-char 1))
+      (?, (my-newline-indent-char (* level step)))
+      (?\( (cl-incf level)
+           (my-newline-indent-char (* level step)))
+      (?\) (my-newline-indent (* level step))
+           (cl-decf level))
+      (t  (message (following-char))))))
+
 ;;; init.el ends here
