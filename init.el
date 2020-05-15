@@ -535,6 +535,13 @@ Prefix argument N makes it go N lines down first."
 (use-package company-lsp
   :ensure t)
 
+;;;; dired stuff
+;;;;; dired-narrow
+(use-package dired-narrow
+  :ensure t
+  :bind (:map dired-mode-map
+              ("/" . dired-narrow)))
+
 ;;;; Outline minor mode
 (require 'dash)
 (require 'outshine)
