@@ -388,7 +388,7 @@ Prefix argument N makes it go N lines down first."
 ;; see https://github.com/jwiegley/use-package
 (require 'use-package)
 ;;;;; setup use-package
-;; (require 'use-package-always-ensure) ; TODO is this needed?
+(require 'use-package-ensure)
 (setq use-package-always-ensure t)
 
 ;;;; don't use default auto-mode-alist
