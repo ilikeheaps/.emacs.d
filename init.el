@@ -577,6 +577,8 @@ Prefix argument N makes it go N lines down first."
 ;; (add-hook 'sh-mode-hook 'outline-set-sh-mode-headlines)
 ;;;;;;; TODO haskell-mode
 (defun generic-outline-level (regexp-skip regex-count &optional offset)
+  ;; checkdoc-order: nil
+  "Return length of REGEX-COUNT occurence after REGEXP-SKIP.  Subtract OFFSET from the result."
   (save-excursion
     (save-match-data
       (looking-at regexp-skip)
@@ -586,10 +588,13 @@ Prefix argument N makes it go N lines down first."
 
 ;; TODO lambda sees dynamic bindings?
 (defun setup-outline-generic (regex-skip regex-count &optional offset)
+  ;; checkdoc: nil
+  "Setup variables for outline minor mode.  REGEX-SKIP is the initial fragment of outline not counted towards the level, REGEX-COUNT is the part that represents the level, with OFFSET subtracted from its length."
   (setq-local outline-regexp (concat regex-skip regex-count))
   (setq-local outline-level (lambda () (generic-outline-level regex-skip regex-count offset))))
 
 (defun setup-outline-for-haskell ()
+  "Setup outline minor mode for Haskell.  WIP."
   (setup-outline-generic "--[ ]*" "[*]\\{1,8\\}")
   (outline-minor-mode ))
 
