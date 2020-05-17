@@ -75,6 +75,7 @@
 (tool-bar-mode 0)
 
 ;;;; default browser
+(require 'browse-url)
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "surf")
 
