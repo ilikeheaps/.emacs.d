@@ -233,6 +233,7 @@ Prefix argument N makes it go N lines down first."
 
 ;;;; smerge keymap prefix
 ;; this didn't work but now does???
+(require 'smerge-mode)
 (setq smerge-command-prefix (kbd "C-a C-s"))
 ;;;; Some settings
 ;; moving away from Customize
@@ -316,6 +317,7 @@ Prefix argument N makes it go N lines down first."
  '(show-paren-style (quote expression))
  '(tooltip-hide-delay 1200))
 
+(require 'org)
 (setq org-todo-keyword-faces '(("WAIT" . "dark orange")
                                ("FAIL" . "grey")))
 (setq org-todo-keywords '((sequence "TODO(a)" "WAIT(r)" "|" "DONE(s)" "FAIL(t)")))
@@ -773,7 +775,6 @@ Prefix argument N makes it go N lines down first."
   ;; (setq org-log-done 'note)
 
 ;;;;; org-id -- insert CUSTOM_ID when creating links
-  (require 'org-id)
   (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id))
 
 ;;;;; something not working
