@@ -372,27 +372,13 @@ Prefix argument N makes it go N lines down first."
 ;; "VioletRed1"
 
 ;;;; settings for MELPA and packages
-(require 'package)
-(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
-                    (not (gnutls-available-p))))
-       (proto (if no-ssl "http" "https")))
-  (when no-ssl
-    (warn "This version of Emacs doesn't support SSL connections."))
-  (add-to-list 'package-archives
-               `("melpa" . ,(concat proto "://melpa.org/packages/")))
-  (add-to-list 'package-archives
-               `("gnu" . ,(concat proto "://elpa.gnu.org/packages/"))))
-
+;; no MELPA settings, use external package manager
 ;;;;; ensure that use-package is installed
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents)
-  (package-install 'use-package))
 ;; see https://github.com/jwiegley/use-package
 (require 'use-package)
 ;;;;; setup use-package
 (require 'use-package-ensure)
-(setq use-package-always-ensure t)
+(setq use-package-always-ensure nil)
 
 ;;;; don't use default auto-mode-alist
 ;; So that only modes defined from now on will be bound to extensions.
@@ -405,11 +391,9 @@ Prefix argument N makes it go N lines down first."
 ;; Maybe should just set them manually, without use-package
 ;;;;;; Emacs lisp
 (use-package emacs-lisp-mode
-  :ensure nil
   :mode "\\.el\\'")
 ;;;;;; C
 (use-package cc-mode
-  :ensure nil
   :mode ("\\.[ch]\\'" . c-mode))
 ;;;; Uncustomized packages (converting from Customize's `selected-packages`)
 ;;;;;; adaptive-wrap
@@ -429,8 +413,7 @@ Prefix argument N makes it go N lines down first."
   :demand)
 ;;;;;; elm-mode
 (use-package elm-mode
-  :mode "\\.elm\\'"
-  :ensure t)
+  :mode "\\.elm\\'")
 ;;;;;; fill-column-indicator
 (use-package fill-column-indicator
   :commands fci-mode)
@@ -515,7 +498,6 @@ Prefix argument N makes it go N lines down first."
   :mode "\\.\\(scala\\|sbt\\)\\'")
 
 (use-package sbt-mode
-  :ensure t
   :commands sbt-start sbt-command
   :config
   (substitute-key-definition
@@ -524,7 +506,6 @@ Prefix argument N makes it go N lines down first."
    minibuffer-local-completion-map))
 
 (use-package lsp-mode
-  :ensure t
   :hook (scala-mode . lsp)
   :bind (:map lsp-mode-map
               ("M-." . lsp-find-definition)
@@ -533,16 +514,13 @@ Prefix argument N makes it go N lines down first."
   (setq lsp-prefer-flymake nil)
   (setq lsp-enable-snippet nil))
 
-(use-package lsp-ui
-  :ensure t)
+(use-package lsp-ui)
 
-(use-package company-lsp
-  :ensure t)
+(use-package company-lsp)
 
 ;;;; dired stuff
 ;;;;; dired-narrow
 (use-package dired-narrow
-  :ensure t
   :bind (:map dired-mode-map
               ("/" . dired-narrow)))
 
@@ -728,7 +706,6 @@ Prefix argument N makes it go N lines down first."
 ;;;; org-mode
 (use-package org
   :mode ("\\.org\\'" . org-mode)
-  :ensure t
   :config
 ;;;;; TODO custom keymap
   (defvar old-org-mode-map nil)
@@ -972,7 +949,6 @@ Prefix argument N makes it go N lines down first."
 
 ;;;; show completions of the current key stroke (which-key)
 (use-package which-key
-  :ensure t
   :config
   (which-key-setup-side-window-right-bottom)
   :init
@@ -980,12 +956,10 @@ Prefix argument N makes it go N lines down first."
   :bind ("C-h B" . which-key-show-top-level))
 ;;;; colour delimiters (e.g. parens) by depth (rainbow-delimiters)
 (use-package rainbow-delimiters
-  :ensure t
   :init
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode))
 ;;;; colour colour codes (rainbow-mode)
 (use-package rainbow-mode
-  :ensure t
   :init
   (add-hook 'prog-mode-hook 'rainbow-mode))
 
@@ -998,33 +972,28 @@ Prefix argument N makes it go N lines down first."
   :commands poly-org-mode
   ;; it becomes a bit laggy in somewhat big files (like my personal .org)
   ;; :mode ("\\.org\\'" . poly-org-mode)
-  :ensure t)
+  )
 
 ;;;; editing ansible files
 ;;;;; yaml major mode (yaml-mode)
 (use-package yaml-mode
-  :mode "\\.\\(e?ya?\\|ra\\)ml\\'"
-  :ensure t)
+  :mode "\\.\\(e?ya?\\|ra\\)ml\\'")
 ;;;;; ansible minor mode (ansible)
 (use-package ansible
-  :ensure t
   :init
   (add-hook 'yaml-mode-hook '(lambda () (ansible 1))))
 
 ;;;; editing lisp (lispy)
 (use-package lispy
-  :ensure t
   :init
   (add-hook 'lisp-mode-hook 'lispy-mode)
   (add-hook 'emacs-lisp-mode-hook 'lispy-mode))
 
 ;;;; edit helm grep results (wgrep-helm)
-(use-package wgrep-helm
-  :ensure t)
+(use-package wgrep-helm)
 
 ;;;; edit csv files (csv-mode)
 (use-package csv-mode
-  :ensure t
   :mode "\\.csv\\'"
   :config (add-hook 'csv-mode-hook (lambda () (toggle-truncate-lines 1))))
 
