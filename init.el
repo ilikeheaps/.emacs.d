@@ -10,10 +10,12 @@
 ;; - can't edit as org (outorg-...)
 ;;
 ;; Quite possibly heading regexp doesn't work at some point (note how M-RET makes ";;*")
+;; (and it can be toggled but it's kind of independent outline from the used regexp)
 ;;;;; lispy mode seems to assume wrong outline format
 ;;;;; use-package: use delight or diminish
 ;;;;; use-package: check for more cool stuff (key chords? system packages?)
 ;;;;; setting local variables while adhering to checkdoc is ugly
+;;;;; use-package: :init vs :config (2.x changes?)
 ;;; Code:
 
 ;; Added by Package.el.  This must come before configurations of
