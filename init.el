@@ -954,9 +954,9 @@ Prefix argument N makes it go N lines down first."
 
 ;;;; show completions of the current key stroke (which-key)
 (use-package which-key
+  :demand
   :config
   (which-key-setup-side-window-right-bottom)
-  :init
   (which-key-mode)
   :bind ("C-h B" . which-key-show-top-level))
 ;;;; colour delimiters (e.g. parens) by depth (rainbow-delimiters)
