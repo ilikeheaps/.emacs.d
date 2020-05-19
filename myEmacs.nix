@@ -39,5 +39,25 @@ in
       lispy
       wgrep-helm
       proof-general
+      csharp-mode
+      # elm-mode # Emacs Lisp error on startup
+      fill-column-indicator
+      forth-mode
+      fsharp-mode
+      flymake
+      # haskell-mode # Emacs Lisp error on startup
+      # lua-mode # package seems to be broken? hash mismatch
+      racket-mode
+      rust-playground
+      sml-mode
+      scala-mode
+      sbt-mode
+      dired-narrow
+      flycheck-haskell
+      flycheck-plantuml
+      flycheck-rust
+      poly-org
+      yaml-mode
+      csv-mode
     ])
   )
