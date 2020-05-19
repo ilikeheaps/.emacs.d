@@ -386,6 +386,7 @@ Prefix argument N makes it go N lines down first."
   (require 'use-package)
 ;;;;; setup use-package
   (require 'use-package-ensure)
+  (setq use-package-always-demand nil)  ; useful for checking if all packages are installed
   (setq use-package-always-ensure nil))
 (require 'bind-key)
 
