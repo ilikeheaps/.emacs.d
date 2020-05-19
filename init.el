@@ -421,9 +421,12 @@ Prefix argument N makes it go N lines down first."
 ;;;;;; ediprolog
 (use-package ediprolog
   :demand)
-;;;;;; elm-mode
-(use-package elm-mode
-  :mode "\\.elm\\'")
+;;;;;; TODO elm-mode
+;; Error on loading:
+;; > elm-mode/:catch: Cannot open load file: No such file or directory, flymake-proc
+
+;; (use-package elm-mode
+;;   :mode "\\.elm\\'")
 ;;;;;; fill-column-indicator
 (use-package fill-column-indicator
   :commands fci-mode)
@@ -436,20 +439,24 @@ Prefix argument N makes it go N lines down first."
 ;;;;;; haskell-emacs
 (use-package haskell-emacs
   :demand)
-;;;;;; haskell-mode
-(use-package
-  haskell-mode
-  :mode (("\\.hsc\\'" . haskell-mode)
-         ("\\.l[gh]s\\'" . literate-haskell-mode)
-         ("\\.hsig\\'" . haskell-mode)
-         ("\\.[gh]s\\'" . haskell-mode)
-         ("\\.cabal\\'" . haskell-cabal-mode)))
+;;;;;; TODO haskell-mode
+;; Error on loading:
+;; > haskell-mode/:catch: Cannot open load file: No such file or directory, flymake-proc
+
+;; (use-package
+;;   haskell-mode
+;;   :mode (("\\.hsc\\'" . haskell-mode)
+;;          ("\\.l[gh]s\\'" . literate-haskell-mode)
+;;          ("\\.hsig\\'" . haskell-mode)
+;;          ("\\.[gh]s\\'" . haskell-mode)
+;;          ("\\.cabal\\'" . haskell-cabal-mode)))
 ;;;;;; helm
 (use-package helm
   :demand)
-;;;;;; lua-mode
-(use-package lua-mode
-  :mode "\\.lua\\'")
+;;;;;; TODO lua-mode
+;; Nix package is broken
+;; (use-package lua-mode
+;;   :mode "\\.lua\\'")
 ;;;;;; magit
 (use-package magit
   :commands (magit magit-clone magit-init)
