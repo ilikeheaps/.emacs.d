@@ -400,8 +400,8 @@ Prefix argument N makes it go N lines down first."
 ;;;;; Rebind modes present in vanilla Emacs
 ;; Maybe should just set them manually, without use-package
 ;;;;;; Emacs lisp
-(use-package emacs-lisp-mode
-  :mode "\\.el\\'")
+(use-package elisp-mode
+  :mode ("\\.el\\'" . emacs-lisp-mode))
 ;;;;;; C
 (use-package cc-mode
   :mode ("\\.[ch]\\'" . c-mode))
