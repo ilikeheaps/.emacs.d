@@ -19,6 +19,7 @@ in
       tuareg
       lsp-ui
       company-lsp
+      lua-mode
     ]) ++ (with epkgs.melpaPackages; [
     ]) ++ (with epkgs.elpaPackages; [
       debbugs
@@ -46,7 +47,7 @@ in
       fsharp-mode
       flymake
       # haskell-mode # Emacs Lisp error on startup
-      # lua-mode # package seems to be broken? hash mismatch
+      # lua-mode # package seems to be broken? hash mismatch; used melpaStable above instead
       racket-mode
       rust-playground
       sml-mode

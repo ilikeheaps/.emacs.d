@@ -453,10 +453,9 @@ Prefix argument N makes it go N lines down first."
 ;;;;;; helm
 (use-package helm
   :demand)
-;;;;;; TODO lua-mode
-;; Nix package is broken
-;; (use-package lua-mode
-;;   :mode "\\.lua\\'")
+;;;;;; lua-mode
+(use-package lua-mode
+  :mode "\\.lua\\'")
 ;;;;;; magit
 (use-package magit
   :commands (magit magit-clone magit-init)
