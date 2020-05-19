@@ -382,10 +382,12 @@ Prefix argument N makes it go N lines down first."
 ;; no MELPA settings, use external package manager
 ;;;;; ensure that use-package is installed
 ;; see https://github.com/jwiegley/use-package
-(require 'use-package)
+(eval-when-compile
+  (require 'use-package)
 ;;;;; setup use-package
-(require 'use-package-ensure)
-(setq use-package-always-ensure nil)
+  (require 'use-package-ensure)
+  (setq use-package-always-ensure nil))
+(require 'bind-key)
 
 ;;;; don't use default auto-mode-alist
 ;; So that only modes defined from now on will be bound to extensions.
