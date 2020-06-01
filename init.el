@@ -81,6 +81,8 @@
 (menu-bar-mode 0)
 ;;;; Disable toolbar
 (tool-bar-mode 0)
+;;;; Don't show startup message
+(setq inhibit-startup-message t)
 
 ;;;; default browser
 (require 'browse-url)
