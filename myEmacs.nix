@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> {} }:
 
 let
-  myEmacs = pkgs.emacs25;
+  myEmacs = pkgs.emacs26;
   emacsWithPackages = (pkgs.emacsPackagesGen myEmacs).emacsWithPackages;
 in
   emacsWithPackages (epkgs: (with epkgs.melpaStablePackages; [
@@ -20,6 +20,7 @@ in
       lsp-ui
       company-lsp
       lua-mode
+      haskell-mode
     ]) ++ (with epkgs.melpaPackages; [
     ]) ++ (with epkgs.elpaPackages; [
       debbugs
@@ -41,12 +42,11 @@ in
       wgrep-helm
       proof-general
       csharp-mode
-      # elm-mode # Emacs Lisp error on startup
+      elm-mode
       fill-column-indicator
       forth-mode
       fsharp-mode
       flymake
-      # haskell-mode # Emacs Lisp error on startup
       # lua-mode # package seems to be broken? hash mismatch; used melpaStable above instead
       racket-mode
       rust-playground

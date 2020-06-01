@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;; No commentary here, flycheck just wanted me to put these sections here
 ;;;; TODO list
-;;;;; when migrating to Emacs 26, customize header-line-highlight (see how info mode looks)
+;;;;; customize header-line-highlight (see how info mode looks)
 ;;;;; customize minor modes display
 ;;;;; outline minor mode doesn't work properly (maybe because of outshine?)
 ;; Problems
@@ -11,6 +11,7 @@
 ;;
 ;; Quite possibly heading regexp doesn't work at some point (note how M-RET makes ";;*")
 ;; (and it can be toggled but it's kind of independent outline from the used regexp)
+;;;;; polymode minor mode seems a bit broken -> flycheck
 ;;;;; lispy mode seems to assume wrong outline format
 ;;;;; use-package: use delight or diminish
 ;;;;; use-package: check for more cool stuff (key chords? system packages?)
@@ -793,18 +794,8 @@ Prefix argument N makes it go N lines down first."
 ;;;;; org-babel-execute for Haskell
 (require 'ob-haskell)
 
-;;;;; TODO org-babel-execute for bash
-;; this didn't work on a new machine
-;; > (require 'ob-sh)
-;; > (org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))
-;; maybe this will work?
-;; I don't think so
-;; > (use-package ob-sh
-;; >   :config
-;; >   (org-babel-do-load-languages 'org-babel-load-languages '((sh . t))))
-(org-babel-do-load-languages 'org-babel-load-languages '((sh . t)))
-
-
+;;;;; org-babel-execute for bash
+(org-babel-do-load-languages 'org-babel-load-languages '((shell . t)))
 
 ;;;; OCaml stuff
 (let ((opam-share (ignore-errors (car (process-lines "opam" "config" "var" "share")))))
