@@ -83,6 +83,8 @@
 (tool-bar-mode 0)
 ;;;; Don't show startup message
 (setq inhibit-startup-message t)
+;;;; light up the frame when ringing a bell
+(setq visible-bell t)
 
 ;;;; default browser
 (require 'browse-url)
