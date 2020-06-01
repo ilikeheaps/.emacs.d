@@ -75,11 +75,11 @@
 ;;      '(multiple-frames "%b" ("" invocation-name "@" system-name " - %b")))
 ;; display just the buffer name
 (setq frame-title-format "%b")
-;;;;; Highlight matching parentheses when the point is on them.
+;;;; Highlight matching parentheses when the point is on them.
 (show-paren-mode 1)
-;;;;; Disable menubar
+;;;; Disable menubar
 (menu-bar-mode 0)
-;;;;; Disable toolbar
+;;;; Disable toolbar
 (tool-bar-mode 0)
 
 ;;;; default browser
