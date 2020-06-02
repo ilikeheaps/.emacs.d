@@ -755,9 +755,9 @@ Prefix argument N makes it go N lines down first."
   (define-key org-mode-map (kbd "M-n") 'org-metaleft)
   (define-key org-mode-map (kbd "M-i") 'org-metaright)
 
-  (define-key org-mode-map (kbd "C-<ret>") 'org-insert-heading-respect-content)
-  (define-key org-mode-map (kbd "M-<ret>") 'org-meta-return)
-  (define-key org-mode-map (kbd "M-S-<ret>") 'org-meta-return)
+  (define-key org-mode-map (kbd "C-<return>") 'org-insert-heading-respect-content)
+  (define-key org-mode-map (kbd "M-<return>") 'org-meta-return)
+  (define-key org-mode-map (kbd "M-S-<return>") 'org-meta-return)
 ;;;;; enable pretty bullets
   (add-hook 'org-mode-hook 'org-bullets-mode)
 ;;;;; prevent org mode from repositioning text when cycling visibility
