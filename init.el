@@ -926,13 +926,14 @@ Prefix argument N makes it go N lines down first."
    )
   ;; frame (list (cons 'cursor-color "DeepSkyBlue")))
   ;;Fira Code font when available
-  (when (and (display-graphic-p) (font-info "Fira Code"))
+  (when (display-graphic-p)
     ;; distinguish between <C-m> and RET (GUI only)
     (define-key input-decode-map [?\C-m] [C-m])
     ;; distinguish between <C-i> and TAB (GUI only)
-    (define-key input-decode-map [?\C-i] [C-i])
-    (set-frame-font "Fira Code" nil (list frame))
-    ))
+    (define-key input-decode-map [?\C-i] [C-i]))
+  (when (and (display-graphic-p)
+             (font-info "Fira Code"))
+    (set-frame-font "Fira Code" nil (list frame))))
 
 ;; this is for running emacs without daemon
 (when (window-system)
