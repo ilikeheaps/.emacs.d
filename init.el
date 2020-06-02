@@ -930,8 +930,8 @@ Prefix argument N makes it go N lines down first."
     (define-key input-decode-map [?\C-m] [C-m])
     ;; distinguish between <C-i> and TAB (GUI only)
     (define-key input-decode-map [?\C-i] [C-i]))
-  ;; Fira Code font when available
-  (let ((font "Fira Code"))
+  ;; Fira Mono font when available
+  (let ((font "Fira Mono"))
     (when (and (display-graphic-p)
                (font-info font))
       (set-frame-font font nil (list frame)))))
