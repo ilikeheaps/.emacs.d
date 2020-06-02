@@ -936,7 +936,7 @@ Prefix argument N makes it go N lines down first."
     (set-frame-font "Fira Code" nil (list frame))))
 
 ;; this is for running emacs without daemon
-(when (window-system)
+(when (display-graphic-p)
   (setup-frame (selected-frame)))
 
 (add-hook 'after-make-frame-functions 'setup-frame t)
