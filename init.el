@@ -732,7 +732,7 @@ Prefix argument N makes it go N lines down first."
   (defvar old-org-mode-map nil)
   (setq old-org-mode-map (if (not old-org-mode-map) org-mode-map old-org-mode-map))
   (setq org-mode-map (make-sparse-keymap))
-  (define-key org-mode-map "<tab>" 'org-cycle)
+  (define-key org-mode-map (kbd "<tab>") 'org-cycle)
   (define-key org-mode-map "\t" 'org-cycle)
   (define-key org-mode-map (kbd "<backtab>") 'org-shifttab)
   (define-key org-mode-map (kbd "C-S-e") 'org-shiftcontroldown)
