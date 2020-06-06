@@ -60,5 +60,6 @@ in
       poly-org
       yaml-mode
       csv-mode
+      htmlize
     ])
   )
