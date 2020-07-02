@@ -719,11 +719,6 @@ Prefix argument N makes it go N lines down first."
 (use-package flycheck-ocaml
   :demand)
 
-;;;; enable centered-window mode
-;; (require 'centered-window-mode)
-(when (>= emacs-major-version 25)
-  (centered-window-mode t))
-
 ;;;; org-mode
 (use-package org
   :mode ("\\.org\\'" . org-mode)
