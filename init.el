@@ -740,10 +740,11 @@ Prefix argument N makes it go N lines down first."
   (define-key org-mode-map (kbd "S-n") 'org-shiftleft)
   (define-key org-mode-map (kbd "S-i") 'org-shiftright)
 
-  (define-key org-mode-map (kbd "M-S-e") 'org-shiftmetadown)
-  (define-key org-mode-map (kbd "M-S-u") 'org-shiftmetaup)
-  (define-key org-mode-map (kbd "M-S-n") 'org-shiftmetaleft)
-  (define-key org-mode-map (kbd "M-S-i") 'org-shiftmetaright)
+  ;; why doesn't M-S-e work when C-S-e above works?
+  (define-key org-mode-map (kbd "M-E") 'org-shiftmetadown)
+  (define-key org-mode-map (kbd "M-U") 'org-shiftmetaup)
+  (define-key org-mode-map (kbd "M-N") 'org-shiftmetaleft)
+  (define-key org-mode-map (kbd "M-I") 'org-shiftmetaright)
 
   (define-key org-mode-map (kbd "M-e") 'org-metadown)
   (define-key org-mode-map (kbd "M-u") 'org-metaup)
