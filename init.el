@@ -928,6 +928,7 @@ Prefix argument N makes it go N lines down first."
     (define-key input-decode-map [?\C-i] [C-i]))
   )
 
+;; TODO fix condition -- doesn't run when launching emacsclient
 ;; Fira Mono font when available
 (let ((font "Fira Mono"))
   (when (and (display-graphic-p)
