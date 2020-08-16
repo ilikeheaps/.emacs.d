@@ -986,7 +986,10 @@ Prefix argument N makes it go N lines down first."
   :commands poly-org-mode
   ;; it becomes a bit laggy in somewhat big files (like my personal .org)
   ;; :mode ("\\.org\\'" . poly-org-mode)
-  )
+  :config
+  (defvar old-poly-org-mode-map nil)
+  (setq old-poly-org-mode-map (if old-poly-org-mode-map old-poly-org-mode-map poly-org-mode-map))
+  (setq poly-org-mode-map (make-sparse-keymap)))
 
 ;;;; editing ansible files
 ;;;;; yaml major mode (yaml-mode)
