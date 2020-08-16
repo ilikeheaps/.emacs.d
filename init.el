@@ -933,7 +933,7 @@ Prefix argument N makes it go N lines down first."
   (when (and (display-graphic-p)
              (font-info font))
     (set-face-attribute 'default nil :font font)
-    (set-face-attribute 'default nil :height 130)
+    (set-face-attribute 'default nil :height 120)
     ))
 
 ;; this is for running emacs without daemon
