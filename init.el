@@ -941,17 +941,16 @@ Prefix argument N makes it go N lines down first."
     (define-key input-decode-map [?\C-i] [C-i]))
   )
 
-;; TODO fix condition -- doesn't run when launching emacsclient
-;; Fira Mono font when available
-(let ((font "Fira Mono"))
-  (when (and (display-graphic-p)
-             (font-info font))
-    (set-face-attribute 'default nil :font font)
-    (set-face-attribute 'default nil :height 120)
-    ))
 
-;; this is for running emacs without daemon
 (when (display-graphic-p)
+  ;; TODO fix condition -- doesn't run when launching emacsclient
+  ;; Fira Mono font when available
+  (let ((font "Fira Mono"))
+    (when (font-info font)
+      (set-face-attribute 'default nil :font font)
+      (set-face-attribute 'default nil :height 120)))
+
+  ;; this is for running emacs without daemon
   (setup-frame (selected-frame)))
 
 (add-hook 'after-make-frame-functions 'setup-frame t)
