@@ -760,10 +760,10 @@ Prefix argument N makes it go N lines down first."
   (define-key org-mode-map (kbd "C-c .") 'org-time-stamp)
   (define-key org-mode-map (kbd "C-c C-t") 'org-todo)
 
-  (define-key org-mode-map (kbd "M-r") 'org-backward-element)
-  (define-key org-mode-map (kbd "M-t") 'org-forward-element)
-  (define-key org-mode-map (kbd "M-f") 'org-up-element)
-  (define-key org-mode-map (kbd "M-s") 'org-down-element)
+  (define-key org-mode-map (kbd "M-r") 'org-backward-heading-same-level)
+  (define-key org-mode-map (kbd "M-t") 'org-forward-heading-same-level)
+  (define-key org-mode-map (kbd "M-f") 'outline-up-heading)
+  (define-key org-mode-map (kbd "M-s") 'outline-next-visible-heading)
 
   (define-key org-mode-map (kbd "M-T") 'org-drag-element-forward)
   (define-key org-mode-map (kbd "M-R") 'org-drag-element-backward)
