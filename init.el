@@ -919,14 +919,9 @@ Prefix argument N makes it go N lines down first."
 
 (require 'frame)
 
-;; TODO it looks like the very first frame ever doesn't run this
-;;    * it does but (window-system) returns nil at the time
-;;    * (display-graphic-p) doesn't work as well
 ;; NOTE see initial-frame-alist
 (defun setup-frame (frame)
   "Function to perform on every newly created FRAME."
-  ;; just for testing (see TODO above)
-  (print "setup-frame-hook peformed!")
   (modify-frame-parameters
    frame
    ;; (blink-cursor-alist . '((
@@ -943,18 +938,17 @@ Prefix argument N makes it go N lines down first."
   )
 
 
-(when (display-graphic-p)
-  ;; TODO fix condition -- doesn't run when launching emacsclient
+(defun setup-frame-once ()
+  "Set frame settings, then remove itself from `focus-in-hook`.  Hack around lack of proper hook for creating emacsclient windows ([https://www.reddit.com/r/emacs/comments/6lxf9b/question_emacsclient_and_connection_hooks] - `after-make-frame-functions` don't run after creation of the first emacsclient frame; `server-visit-hook` doesn't run on opening new blank frame)."
   ;; Fira Mono font when available
   (let ((font "Fira Mono"))
     (when (font-info font)
       (set-face-attribute 'default nil :font font)
       (set-face-attribute 'default nil :height 120)))
-
   ;; this is for running emacs without daemon
-  (setup-frame (selected-frame)))
-
-(add-hook 'after-make-frame-functions 'setup-frame t)
+  (setup-frame (selected-frame))
+  (remove-hook 'focus-in-hook #'setup-frame-once))
+(add-hook 'focus-in-hook 'setup-frame-once t)
 
 ;;;; plantuml settings (binary etc.)
 
