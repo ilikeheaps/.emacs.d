@@ -89,7 +89,8 @@
 ;;;; default browser
 (require 'browse-url)
 (setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "surf")
+      browse-url-generic-program "chromium-browser"
+      browse-url-generic-args '("--new-window"))
 
 ;;;; custom defined commands
 
