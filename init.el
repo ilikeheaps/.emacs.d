@@ -360,6 +360,10 @@ Prefix argument N makes it go N lines down first."
  '(powerline-active2 ((t (:inherit mode-line-inactive :background "grey10"))))
  '(show-paren-match ((t (:background "dark slate gray")))))
 
+;; (set-background-color "#2d3743") ; default misterioso theme background
+;; (set-background-color "#2a2f35")
+(add-to-list 'default-frame-alist '(background-color . "#212b35"))
+;; (set-background-color "#151b25")
 
 (require 'outline)
 ;; TODO set-face-attribute is supposed to be used internally, what's a good function to use instead?
