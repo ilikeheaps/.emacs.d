@@ -659,7 +659,7 @@ Prefix argument N makes it go N lines down first."
 ;;    (adaptive-wrap-prefix-mode +1)
 ;;    (diminish 'visual-line-mode)))
 
-;;;; fuck tabs
+;;;; don't ever insert tabs
 (setq-default indent-tabs-mode nil)
 
 ;;;; Haskell mode stuff
