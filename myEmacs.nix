@@ -57,7 +57,7 @@ in
       flycheck-haskell
       flycheck-plantuml
       flycheck-rust
-      poly-org
+      # poly-org # can't remove it from auto-mode-alist otherwise
       yaml-mode
       csv-mode
       htmlize

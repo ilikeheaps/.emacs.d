@@ -989,14 +989,16 @@ Prefix argument N makes it go N lines down first."
 
 ;;;; Use multiple major modes in org buffers (poly-org)
 ;; this will (almost) seamlessly switch between major modes in org buffers depending on the context (code blocks, ...?)
-(use-package poly-org
-  :commands poly-org-mode
-  ;; it becomes a bit laggy in somewhat big files (like my personal .org)
-  ;; :mode ("\\.org\\'" . poly-org-mode)
-  :config
-  (defvar old-poly-org-mode-map nil)
-  (setq old-poly-org-mode-map (if old-poly-org-mode-map old-poly-org-mode-map poly-org-mode-map))
-  (setq poly-org-mode-map (make-sparse-keymap)))
+;; TODO poly-org-mode inserts itself into auto-mode-alist and even removing this doesn't fix it
+;;      (check nix package?)
+;; (use-package poly-org
+;;   :commands poly-org-mode
+;;   ;; it becomes a bit laggy in somewhat big files (like my personal .org)
+;;   ;; :mode ("\\.org\\'" . poly-org-mode)
+;;   :config
+;;   (defvar old-poly-org-mode-map nil)
+;;   (setq old-poly-org-mode-map (if old-poly-org-mode-map old-poly-org-mode-map poly-org-mode-map))
+;;   (setq poly-org-mode-map (make-sparse-keymap)))
 
 ;;;; editing ansible files
 ;;;;; yaml major mode (yaml-mode)
