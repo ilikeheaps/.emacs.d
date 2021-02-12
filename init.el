@@ -534,7 +534,8 @@ Prefix argument N makes it go N lines down first."
               ("M-," . xref-pop-marker-stack))
   :config
   (setq lsp-prefer-flymake nil)
-  (setq lsp-enable-snippet nil))
+  (setq lsp-enable-snippet nil)
+  (setq lsp-log-io t))
 
 (use-package lsp-ui)
 
