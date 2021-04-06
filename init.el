@@ -720,9 +720,10 @@ Prefix argument N makes it go N lines down first."
                #'org-optimize-window-after-visibility-change)
 ;;;;; customize org agenda grid
   (setq org-agenda-time-grid
-        `((daily today require-timed remove-match)
-          #("----------------" 0 16 (org-heading t))
-          ,(map 'list (lambda (x) (* 100 x)) (number-sequence 8 20))))
+        (list '(daily today require-timed remove-match)
+              (map 'list (lambda (x) (* 100 x)) (number-sequence 8 20))
+              "......"
+              "----------------"))
 ;;;;; org-src settings
   (setq org-src-fontify-natively t
         org-src-tab-acts-natively t
