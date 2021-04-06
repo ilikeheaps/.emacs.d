@@ -491,10 +491,6 @@ Prefix argument N makes it go N lines down first."
 ;;;;;; powerline
 (use-package powerline
   :demand)
-;;;;;; proof-general
-;; TODO auto mode alist entry?
-(use-package proof-general
-  :demand)
 ;;;;;; racket-mode
 (use-package racket-mode
   :mode "\\.rkt[dl]?\\'")
@@ -1060,5 +1056,7 @@ Prefix argument N makes it go N lines down first."
       (?\) (my-newline-indent (* level step))
            (cl-decf level))
       (t  (message (following-char))))))
-
+;;;; proof-general
+(use-package proof-general
+  :mode "\\.v\\'")
 ;;; init.el ends here
