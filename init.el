@@ -705,6 +705,7 @@ Prefix argument N makes it go N lines down first."
   (define-key org-mode-map (kbd "C-c C-c") 'org-ctrl-c-ctrl-c)
   (define-key org-mode-map (kbd "C-c .") 'org-time-stamp)
   (define-key org-mode-map (kbd "C-c C-t") 'org-todo)
+  (define-key org-mode-map (kbd "C-c '") 'org-edit-special)
 
   (define-key org-mode-map (kbd "M-r") 'org-backward-heading-same-level)
   (define-key org-mode-map (kbd "M-t") 'org-forward-heading-same-level)
