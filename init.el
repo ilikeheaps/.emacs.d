@@ -268,62 +268,6 @@ Prefix argument N makes it go N lines down first."
  '(mouse-1-click-follows-link 200)
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
- '(org-activate-links (quote (bracket angle radio tag date footnote)))
- '(org-agenda-files (quote ("~/Documents/sushi.org")))
- '(org-agenda-tags-column -100)
- '(org-babel-load-languages (quote ((emacs-lisp . t))))
- '(org-bullets-bullet-list (quote ("●" "◉" "○")))
- '(org-id-link-to-org-use-id t)
- '(org-structure-template-alist
-   (quote
-    (("s" "#+BEGIN_SRC ?
-#+END_SRC" "<src lang=\"?\">
-</src>")
-     ("e" "#+BEGIN_EXAMPLE
-?
-#+END_EXAMPLE" "<example>
-?
-</example>")
-     ("q" "#+BEGIN_QUOTE
-?
-#+END_QUOTE" "<quote>
-?
-</quote>")
-     ("v" "#+BEGIN_VERSE
-?
-#+END_VERSE" "<verse>
-?
-</verse>")
-     ("V" "#+BEGIN_VERBATIM
-?
-#+END_VERBATIM" "<verbatim>
-?
-</verbatim>")
-     ("c" "#+BEGIN_CENTER
-?
-#+END_CENTER" "<center>
-?
-</center>")
-     ("l" "#+BEGIN_LaTeX
-?
-#+END_LaTeX" "<literal style=\"latex\">
-?
-</literal>")
-     ("L" "#+LaTeX: " "<literal style=\"latex\">?</literal>")
-     ("h" "#+BEGIN_SRC haskell
-?
-#+END_SRC" "<src lang=\"haskell\">
-?
-</src>")
-     ("H" "#+HTML: " "<literal style=\"html\">?</literal>")
-     ("a" "#+BEGIN_ASCII
-?
-#+END_ASCII" "")
-     ("A" "#+ASCII: " "")
-     ("i" "#+INDEX: ?" "#+INDEX: ?")
-     ("I" "#+INCLUDE: %file ?" "<include file=%file markup=\"?\">")
-     ("html " "#+BEGIN_HTML\\n?\\n#+END_HTML" "<literal style=\\\"html\\\">\\n?\\n</literal>"))))
- '(org-tags-column -100)
  '(semantic-mode t)
  '(show-paren-style (quote expression))
  '(tooltip-hide-delay 1200))
@@ -788,6 +732,17 @@ Prefix argument N makes it go N lines down first."
   ;; make a note when closing items
   ;; (setq org-log-done 'note)
 
+;;;;; various settings moved from Customize
+  (setq org-activate-links (quote (bracket angle radio tag date footnote)))
+  (setq org-agenda-files (quote ("~/Documents/sushi.org")))
+  (setq org-agenda-tags-column -100)
+  (setq org-babel-load-languages (quote ((emacs-lisp . t))))
+  (setq org-bullets-bullet-list (quote ("●" "◉" "○")))
+  (setq org-id-link-to-org-use-id t)
+  (setq org-tags-column -100)
+  ;; TODO could add it only if not already present
+  (map-put org-structure-template-alist "h" '("#+BEGIN_SRC haskell\n?\n#+END_SRC"
+                                              "<src lang=\"haskell\">\n?\n</src>"))
 ;;;;; org-id -- insert CUSTOM_ID when creating links
   (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id))
 
