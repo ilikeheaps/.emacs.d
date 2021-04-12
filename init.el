@@ -256,7 +256,6 @@ Prefix argument N makes it go N lines down first."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(company-idle-delay 0.2)
- '(custom-enabled-themes (quote (misterioso)))
  '(delete-active-region nil)
  '(doc-view-resolution 300)
  '(fci-rule-color "dim gray")
@@ -277,11 +276,10 @@ Prefix argument N makes it go N lines down first."
                                ("FAIL" . "grey")))
 (setq org-todo-keywords '((sequence "TODO(a)" "WAIT(r)" "|" "DONE(s)" "FAIL(t)")))
 
+;;;; Colour theme settings
+(load-theme 'adwaita)
 (custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
+ ;; TODO update these to light theme
  '(ediff-even-diff-A ((t (:background "#343551"))))
  '(ediff-odd-diff-A ((t (:background "#343551"))))
  '(ediff-even-diff-B ((t (:background "#343551"))))
@@ -294,41 +292,27 @@ Prefix argument N makes it go N lines down first."
  '(fringe ((t (:background "#1d2733"))))
  '(haskell-debug-newline-face ((t (:background "#f0f0f0" :foreground "dark gray" :weight bold))))
  '(haskell-debug-trace-number-face ((t (:background "#f5f5f5" :foreground "dark gray" :weight bold))))
- '(header-line ((t (:background "gray" :foreground "#333333"))))
+ '(header-line ((t (:background "#CCCCCC" :foreground "#000000"))))
  '(org-meta-line ((t (:inherit font-lock-comment-face :foreground "dark slate gray"))))
- '(powerline-inactive0 ((t (:inherit mode-line :background "gray44"))))
- '(powerline-inactive1 ((t (:inherit mode-line :background "gray34" :foreground "white"))))
- '(powerline-inactive2 ((t (:inherit mode-line :background "gray28" :foreground "white"))))
- '(powerline-active0 ((t (:inherit mode-line-inactive :background "gray24"))))
- '(powerline-active1 ((t (:inherit mode-line-inactive :background "gray18"))))
- '(powerline-active2 ((t (:inherit mode-line-inactive :background "grey10"))))
- '(show-paren-match ((t (:background "dark slate gray")))))
-
-;; (set-background-color "#2d3743") ; default misterioso theme background
-;; (set-background-color "#2a2f35")
-(add-to-list 'default-frame-alist '(background-color . "#212b35"))
-;; (set-background-color "#151b25")
-
-(require 'outline)
-;; TODO set-face-attribute is supposed to be used internally, what's a good function to use instead?
-(set-face-attribute 'outline-1 nil :foreground "cyan")
-(set-face-attribute 'outline-2 nil :foreground "deep sky blue")
-(set-face-attribute 'outline-3 nil :foreground "chartreuse3")
-(set-face-attribute 'outline-4 nil :foreground "gold2")
-(set-face-attribute 'outline-5 nil :foreground "sandy brown")
-(set-face-attribute 'outline-6 nil :foreground "yellow green")
-(set-face-attribute 'outline-7 nil :foreground "goldenrod")
-(set-face-attribute 'outline-7 nil :foreground "dark orange")
-;; other candidates:
-;; "green yellow" -- very strong
-;; "lime green"
-;; "light sky blue"
-;; "medium purple"
-;; "light slate blue"
-;; "DarkOrange2"
-;; "RoyalBlue1"
-;; "MediumOrchid1"
-;; "VioletRed1"
+ '(mode-line ((t (:background "white" :foreground "black"))))
+ '(mode-line-inactive ((t (:background "white" :foreground "#404040"))))
+ '(powerline-inactive0 ((t (:inherit mode-line :background "#C0C0C0"))))
+ '(powerline-inactive1 ((t (:inherit mode-line :background "#D0D0D0"))))
+ '(powerline-inactive2 ((t (:inherit mode-line :background "#E0E0E0"))))
+ '(powerline-active0 ((t (:inherit mode-line-inactive :background "#F0F0F0"))))
+ '(powerline-active1 ((t (:inherit mode-line-inactive :background "#F5F5F5"))))
+ '(powerline-active2 ((t (:inherit mode-line-inactive :background "#FAFAFA"))))
+ '(show-paren-match ((t (:background "#DDDDDD"))))
+ '(default ((t :background "#FFFFFF")))
+ ;; outline (and -> org-mode) headers
+ '(outline-1 ((t :foreground "#0040ff" :weight semi-bold)))
+ '(outline-2 ((t :foreground "#00a4db" :weight semi-bold)))
+ '(outline-3 ((t :foreground "#00AA00" :weight semi-bold)))
+ '(outline-4 ((t :foreground "#D5c200" :weight semi-bold)))
+ '(outline-5 ((t :foreground "#Ffa500" :weight semi-bold)))
+ '(outline-6 ((t :foreground "#Ff4500" :weight semi-bold)))
+ '(outline-7 ((t :foreground "#Cd1076" :weight semi-bold)))
+ '(outline-8 ((t :foreground "#A020f0" :weight semi-bold))))
 
 ;;;; settings for MELPA and packages
 ;; no MELPA settings, use external package manager
