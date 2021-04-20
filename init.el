@@ -241,8 +241,7 @@ Prefix argument N makes it go N lines down first."
     (set-key "<f5>" 'linkify-path-or-kill-line)
 
     (define-key universal-argument-map (kbd "C-l") 'universal-argument-more)
-    (define-key universal-argument-map (kbd "C-u") 'scroll-down-line))
-  )
+    (define-key universal-argument-map (kbd "C-u") 'scroll-down-line)))
 
 ;;;; smerge keymap prefix
 ;; this didn't work but now does???
@@ -321,7 +320,7 @@ Prefix argument N makes it go N lines down first."
   (require 'use-package)
 ;;;;; setup use-package
   (require 'use-package-ensure)
-  (setq use-package-always-demand nil)  ; useful for checking if all packages are installed
+  (setq use-package-always-demand nil) ; useful for checking if all packages are installed
   (setq use-package-always-ensure nil))
 (require 'bind-key)
 
