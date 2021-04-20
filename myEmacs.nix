@@ -1,65 +1,60 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ sources ? import ./nix/sources.nix
+, pkgs ? import sources.nixpkgs {}
+}:
 
 let
-  myEmacs = pkgs.emacs26;
-  emacsWithPackages = (pkgs.emacsPackagesGen myEmacs).emacsWithPackages;
+  myEmacs = pkgs.emacs27;
+  emacsWithPackages = (pkgs.emacsPackagesNgGen myEmacs).emacsWithPackages;
 in
   emacsWithPackages (epkgs: (with epkgs.melpaStablePackages; [
-      magit
-      use-package
+      ansible
+      elm-mode
+      fill-column-indicator
+      flycheck
+      flycheck-haskell
+      flycheck-ocaml
+      flycheck-rust
+      flycheck-status-emoji
+      fsharp-mode
       haskell-emacs
+      haskell-mode
       helm
+      htmlize
+      lispy
+      lua-mode
+      magit
       org-bullets
       org-tree-slide
       outshine
+      plantuml-mode
       powerline
-      # proof-general # didn't work; used epkgs.proof-general instead
-      sr-speedbar
+      rainbow-delimiters
+      rust-playground
+      sbt-mode
+      scala-mode
       sublimity
       tuareg
-      lsp-ui
-      company-lsp
-      lua-mode
-      haskell-mode
-    ]) ++ (with epkgs.melpaPackages; [
-    ]) ++ (with epkgs.elpaPackages; [
-      debbugs
-      ediprolog
-      undo-tree
-    ]) ++ (with epkgs; [
-      adaptive-wrap
-      debbugs
-      flycheck
-      flycheck-status-emoji
-      flycheck-ocaml
-      centered-window
-      plantuml-mode
-      which-key
-      rainbow-delimiters
-      rainbow-mode
-      ansible
-      lispy
+      use-package
       wgrep-helm
-      proof-general
-      csharp-mode
-      elm-mode
-      fill-column-indicator
-      forth-mode
-      fsharp-mode
-      flymake
-      # lua-mode # package seems to be broken? hash mismatch; used melpaStable above instead
-      racket-mode
-      rust-playground
-      sml-mode
-      scala-mode
-      sbt-mode
-      dired-narrow
-      flycheck-haskell
-      flycheck-plantuml
-      flycheck-rust
-      # poly-org # can't remove it from auto-mode-alist otherwise
+      which-key
       yaml-mode
+    ]) ++ (with epkgs.melpaPackages; [
+      centered-window
+      csharp-mode
+      # ^ stable melpa version outputs error: https://github.com/emacs-csharp/csharp-mode/issues/208
+      dired-narrow
+      proof-general
+      # ^ stable melpa version just didn't work
+      flycheck-plantuml
+      forth-mode
+      racket-mode
+    ]) ++ (with epkgs.elpaPackages; [
+      adaptive-wrap
+      company
       csv-mode
-      htmlize
+      ediprolog
+      rainbow-mode
+      sml-mode
+      undo-tree
     ])
   )

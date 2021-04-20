@@ -26,7 +26,7 @@
 ;; (package-initialize)
 
 ;; provides =flet= (and more)
-(eval-when-compile (require 'cl))
+(eval-when-compile (require 'cl-macs))
 
 ;; NOTE now this makes customize handicapped because the file isn't loaded -- it can't be loaded because it would conflict with this file's customize sections which I don't want to be automatically changed by customize
 (setq custom-file (concat user-emacs-directory "custom.el"))
@@ -185,11 +185,11 @@ Prefix argument N makes it go N lines down first."
 (define-prefix-command 'ctrl-o-prefix)
 (define-prefix-command 'meta-s-prefix)
 
-(flet ((set-key (str fun) (global-set-key (kbd str) fun))
-       (three-level (str fun1 fun2 fun3)
-                    (set-key (concat "C-" str) fun1)
-                    (set-key (concat "C-S-" str) fun2)
-                    (set-key (concat "M-" str) fun3)))
+(cl-flet* ((set-key (str fun) (global-set-key (kbd str) fun))
+           (three-level (str fun1 fun2 fun3)
+                        (set-key (concat "C-" str) fun1)
+                        (set-key (concat "C-S-" str) fun2)
+                        (set-key (concat "M-" str) fun3)))
   (progn
     ;; Turn on horizontal scrolling with mouse wheel
     (set-key "<mouse-6>" '(lambda ()
@@ -286,7 +286,6 @@ Prefix argument N makes it go N lines down first."
  '(ediff-odd-diff-B ((t (:background "#343551"))))
  '(ediff-even-diff-C ((t (:background "#343551"))))
  '(ediff-odd-diff-C ((t (:background "#343551"))))
- '(lsp-ui-sideline-global ((t (:background "#222235"))))
  '(term-color-blue ((t (:foreground "#AA88FF"))))
  ;; there are also a few other defined terminal colours (8 in total?)
  '(fringe ((t (:background "#1d2733"))))
@@ -353,9 +352,6 @@ Prefix argument N makes it go N lines down first."
 ;;;;;; csharp-mode
 (use-package csharp-mode
   :mode "\\.cs$")
-;;;;;; debbugs
-(use-package debbugs
-  :demand)
 ;;;;;; ediprolog
 (use-package ediprolog
   :demand)
@@ -430,9 +426,6 @@ Prefix argument N makes it go N lines down first."
   :mode (("\\.grm\\'" . sml-yacc-mode)
          ("\\.cm\\'" . sml-cm-mode)
          ("\\.s\\(ml\\|ig\\)\\'" . sml-mode)))
-;;;;;; sr-speedbar
-(use-package sr-speedbar
-  :demand)
 ;;;;;; sublimity
 (use-package sublimity
   :demand)
@@ -464,10 +457,6 @@ Prefix argument N makes it go N lines down first."
   (setq lsp-prefer-flymake nil)
   (setq lsp-enable-snippet nil)
   (setq lsp-log-io t))
-
-(use-package lsp-ui)
-
-(use-package company-lsp)
 
 ;;;; dired stuff
 ;;;;; dired-narrow
@@ -532,7 +521,7 @@ Prefix argument N makes it go N lines down first."
 ;;;; package-dependent global keybinds
 ;; TODO configuration for specific packages could be done with (use-package ... :config ...)
 ;;      but it would also make it easier to make overlapping keybinds :c
-(flet ((set-key (str fun) (global-set-key (kbd str) fun)))
+(cl-flet ((set-key (str fun) (global-set-key (kbd str) fun)))
   (progn
     (set-key "<C-m>" 'magit-status) ;; NOTE only works in GUI!
     ;; TODO don't use C-c prefix
@@ -706,7 +695,7 @@ Prefix argument N makes it go N lines down first."
 ;;;;; customize org agenda grid
   (setq org-agenda-time-grid
         (list '(daily today require-timed remove-match)
-              (map 'list (lambda (x) (* 100 x)) (number-sequence 8 20))
+              (cl-map 'list (lambda (x) (* 100 x)) (number-sequence 8 20))
               "......"
               "----------------"))
 ;;;;; org-src settings
@@ -727,7 +716,7 @@ Prefix argument N makes it go N lines down first."
   (setq org-id-link-to-org-use-id t)
   (setq org-tags-column -100)
   ;; TODO could add it only if not already present
-  (map-put org-structure-template-alist "h" '("#+BEGIN_SRC haskell\n?\n#+END_SRC"
+  (map-put! org-structure-template-alist "h" '("#+BEGIN_SRC haskell\n?\n#+END_SRC"
                                               "<src lang=\"haskell\">\n?\n</src>"))
 ;;;;; org-id -- insert CUSTOM_ID when creating links
   (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id))
@@ -999,5 +988,6 @@ Prefix argument N makes it go N lines down first."
       (t  (message (following-char))))))
 ;;;; proof-general
 (use-package proof-general
-  :mode "\\.v\\'")
+  :mode ("\\.v\\'" . coq-mode)
+  :config (setq coq-compile-before-require t))
 ;;; init.el ends here
