@@ -694,6 +694,8 @@ Prefix argument N makes it go N lines down first."
               (cl-map 'list (lambda (x) (* 100 x)) (number-sequence 8 20))
               "......"
               "----------------"))
+  (setq org-agenda-deadline-faces '((1.0 . org-warning)
+                                    (0.0 . org-upcoming-distant-deadline)))
 ;;;;; org-src settings
   (setq org-src-fontify-natively t
         org-src-tab-acts-natively t
