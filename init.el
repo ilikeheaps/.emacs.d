@@ -711,9 +711,8 @@ Prefix argument N makes it go N lines down first."
   (setq org-bullets-bullet-list (quote ("●" "◉" "○")))
   (setq org-id-link-to-org-use-id t)
   (setq org-tags-column -100)
-  ;; TODO could add it only if not already present
-  (map-put! org-structure-template-alist "h" '("#+BEGIN_SRC haskell\n?\n#+END_SRC"
-                                              "<src lang=\"haskell\">\n?\n</src>"))
+  ;; TODO could add it only if not already present (make precisely idempotent)
+  (map-put! org-structure-template-alist "h" "src haskell")
 ;;;;; org-id -- insert CUSTOM_ID when creating links
   (setq org-id-link-to-org-use-id 'create-if-interactive-and-no-custom-id))
 
