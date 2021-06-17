@@ -262,7 +262,6 @@ Prefix argument N makes it go N lines down first."
  '(haskell-tags-on-save t)
  '(jdee-server-dir "/jar/")
  '(lua-default-application "lua5.3")
- '(magit-display-buffer-function (quote magit-display-buffer-same-window-except-diff-v1))
  '(mouse-1-click-follows-link 200)
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
@@ -390,7 +389,9 @@ Prefix argument N makes it go N lines down first."
 (use-package magit
   :commands (magit magit-clone magit-init)
   :config
-  (setq magit-log-margin '(t "%F %H:%M" magit-log-margin-width t 18)))
+  (setq magit-log-margin '(t "%F %H:%M" magit-log-margin-width t 18))
+  (setq magit-display-buffer-function 'magit-display-buffer-same-window-except-diff-v1)
+  (setq magit-delete-by-moving-to-trash nil))
 ;;;;;; markdown-mode
 ;; TODO? ("\\.markdown\\'" . markdown-mode)
 (use-package markdown-mode
