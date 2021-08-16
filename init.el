@@ -440,6 +440,8 @@ Prefix argument N makes it go N lines down first."
          ("C-f" . helm-previous-line)
          ("C-s" . helm-next-line))
   :config
+  ;; I usually don't need split view and would rather split it in my WM than in Emacs
+  (setq helm-split-window-default-side 'same)
 ;;;;;; bind some commands for find-files (because my basic keybinds are unusual)
   ;; TODO aren't some of these bindings reduntant?
   (use-package helm-types
