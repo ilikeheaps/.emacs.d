@@ -379,9 +379,6 @@ Prefix argument N makes it go N lines down first."
 ;;          ("\\.hsig\\'" . haskell-mode)
 ;;          ("\\.[gh]s\\'" . haskell-mode)
 ;;          ("\\.cabal\\'" . haskell-cabal-mode)))
-;;;;;; helm
-(use-package helm
-  :demand)
 ;;;;;; lua-mode
 (use-package lua-mode
   :mode "\\.lua\\'")
@@ -432,6 +429,31 @@ Prefix argument N makes it go N lines down first."
 ;;;;;; undo-tree
 (use-package undo-tree
   :demand)
+
+;;;; Interactive prompt for selecting files and commands and stuff: helm
+;; it has nice completion and narrowing and you can quickly perform various actions on selection
+(use-package helm
+  :bind (("M-x" . helm-M-x)
+         ("C-x C-f" . helm-find-files)
+         :map helm-map
+         ("C-l" . universal-argument)
+         ("C-f" . helm-previous-line)
+         ("C-s" . helm-next-line))
+  :config
+;;;;;; bind some commands for find-files (because my basic keybinds are unusual)
+  ;; TODO aren't some of these bindings reduntant?
+  (use-package helm-types
+    :bind (:map helm-generic-files-map
+                ("C-p" . helm-ff-run-grep)
+                ("C-s" . helm-next-line)))
+  (use-package helm-files
+    :bind (:map helm-find-files-map
+                ("C-p" . helm-ff-run-grep)
+                ("C-s" . helm-next-line)
+                ("C-l" . universal-argument)
+                ("C-n" . helm-find-files-up-one-level)))
+;;;;;; edit helm grep results in-place
+  (use-package wgrep-helm))
 
 ;;;; Scala development (scala-mode, sbt-mode, lsp-mode, metals)
 (use-package scala-mode
@@ -525,11 +547,6 @@ Prefix argument N makes it go N lines down first."
     (set-key "C-c l" 'org-store-link)
     (set-key "C-c a" 'org-agenda-list)
     (set-key "C-c C-s" 'org-cycle-agenda-files)
-
-    ;; helm stuff
-    ;; (require 'helm-config)
-    (set-key "M-x" 'helm-M-x)
-    (set-key "C-x C-f" 'helm-find-files)
     ))
 
 ;(global-set-key (kbd "<muhenkan> t") 'org-cycle-agenda-files)
@@ -772,39 +789,6 @@ Prefix argument N makes it go N lines down first."
     ;; TODO rebind tuareg-mode: compile from C-c C-c
     (def-key "C-c C-c" 'merlin-error-reset)))
 (add-hook 'merlin-mode-hook 'merlin-my-keybindings t)
-
-;;;; helm keybindings
-(with-eval-after-load 'helm
-  (cl-flet* ((def-key (key-str cmd)
-               (define-key helm-map (kbd key-str) cmd))
-             (undef-key (key-str) (def-key key-str nil)))
-    (def-key "C-l" 'universal-argument)
-    (def-key "C-f" 'helm-previous-line)
-    (def-key "C-s" 'helm-next-line)
-    ))
-;; TODO is this part needed?
-(with-eval-after-load 'helm-types
-  (cl-flet* ((def-key (key-str cmd)
-               (define-key helm-generic-files-map (kbd key-str) cmd))
-             (undef-key (key-str) (def-key key-str nil)))
-    (def-key "C-p" 'helm-ff-run-grep)
-    (def-key "C-s" 'helm-next-line)
-    ))
-(with-eval-after-load 'helm-files
-  (cl-flet* ((def-key (key-str cmd)
-               (define-key helm-find-files-map (kbd key-str) cmd))
-             (undef-key (key-str) (def-key key-str nil)))
-    (def-key "C-p" 'helm-ff-run-grep)
-    (def-key "C-s" 'helm-next-line)
-    (def-key "C-l" 'universal-argument)
-    (def-key "C-n" 'helm-find-files-up-one-level)
-    ))
-
-;;;;; Snippet for checking if bindings are correct
-;; (lookup-key helm-map (kbd "C-s"))
-;; (lookup-key helm-find-files-map (kbd "C-l"))
-;; (lookup-key helm-generic-files-map (kbd "C-s"))
-
 ;;;; org-mode agenda options
 (progn
   ;; TODO consider whether this loads code into memory and stuff
@@ -943,9 +927,6 @@ Prefix argument N makes it go N lines down first."
   :init
   (add-hook 'lisp-mode-hook 'lispy-mode)
   (add-hook 'emacs-lisp-mode-hook 'lispy-mode))
-
-;;;; edit helm grep results (wgrep-helm)
-(use-package wgrep-helm)
 
 ;;;; edit csv files (csv-mode)
 (use-package csv-mode
