@@ -17,6 +17,9 @@
 ;;;;; use-package: check for more cool stuff (key chords? system packages?)
 ;;;;; setting local variables while adhering to checkdoc is ugly
 ;;;;; use-package: :init vs :config (2.x changes?)
+;;;;; disable windowing inside Emacs (unless in terminal?) and use i3 instead
+;; I tried some package for it but it didn't work right.  Now most actions will prefer to open a new frame but some will still split window (e.g. minibuffer-complete).
+;;;;; close frame when killing last buffer that was opened in it
 ;;; Code:
 
 ;; Added by Package.el.  This must come before configurations of
@@ -92,6 +95,13 @@
       browse-url-generic-program "chromium-browser"
       browse-url-generic-args '("--new-window"))
 
+;;;; prefer to display buffers in the same window or new frame
+(setq display-buffer-alist
+      `((,(lambda (name actions) (ignore actions)
+            (not (or  (string-match "\\*Completions\\*" name)
+                      (string-match "\\*transient\\*" name))))
+         (display-buffer-same-window
+          display-buffer-pop-up-frame))))
 ;;;; custom defined commands
 
 ;;;;; navigation commands
