@@ -480,6 +480,7 @@ Prefix argument N makes it go N lines down first."
    minibuffer-local-completion-map))
 
 (use-package lsp-mode
+  :demand
   :hook (scala-mode . lsp)
   :bind (:map lsp-mode-map
               ("M-." . lsp-find-definition)
@@ -488,6 +489,8 @@ Prefix argument N makes it go N lines down first."
   (setq lsp-prefer-flymake nil)
   (setq lsp-enable-snippet nil)
   (setq lsp-log-io t))
+
+(use-package lsp-metals)
 
 ;;;; dired stuff
 ;;;;; dired-narrow
