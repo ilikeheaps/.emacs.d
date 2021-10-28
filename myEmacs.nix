@@ -3,8 +3,11 @@
 }:
 
 let
-  myEmacs = pkgs.emacs27;
-  emacsWithPackages = (pkgs.emacsPackagesNgGen myEmacs).emacsWithPackages;
+  myEmacs = pkgs.emacs27.override {
+    withGTK2 = false;
+    withGTK3 = false;
+  };
+  emacsWithPackages = (pkgs.emacsPackagesFor myEmacs).emacsWithPackages;
 in
   emacsWithPackages (epkgs: (with epkgs.melpaStablePackages; [
       ansible
