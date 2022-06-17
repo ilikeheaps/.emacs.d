@@ -20,6 +20,8 @@
 ;;;;; disable windowing inside Emacs (unless in terminal?) and use i3 instead
 ;; I tried some package for it but it didn't work right.  Now most actions will prefer to open a new frame but some will still split window (e.g. minibuffer-complete).
 ;;;;; close frame when killing last buffer that was opened in it
+;;;;; read Emacs 28 changelog
+;;;;;; consider [same-window-prefix], [other-frame-prefix]
 ;;; Code:
 
 ;; Added by Package.el.  This must come before configurations of
