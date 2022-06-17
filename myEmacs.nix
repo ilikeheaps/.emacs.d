@@ -3,7 +3,7 @@
 }:
 
 let
-  myEmacs = pkgs.emacs27.override {
+  myEmacs = pkgs.emacs28.override {
     withGTK2 = false;
     withGTK3 = false;
   };
