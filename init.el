@@ -101,7 +101,8 @@
 (setq display-buffer-alist
       `((,(lambda (name actions) (ignore actions)
             (not (or  (string-match "\\*Completions\\*" name)
-                      (string-match "\\*transient\\*" name))))
+                      (string-match "\\*transient\\*" name)
+                      (string-match "\\*Org todo\\*" name))))
          (display-buffer-same-window
           display-buffer-pop-up-frame))))
 ;;;; custom defined commands
