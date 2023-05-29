@@ -840,11 +840,13 @@ Prefix argument N makes it go N lines down first."
   (add-hook 'emacs-lisp-mode-hook 'company-mode))
 
 ;;;; local config
-(unless (file-exists-p "~/.emacs.d/config-local.el")
-  (copy-file "~/.emacs.d/config-local-template.el"
-             "~/.emacs.d/config-local.el"
+;; In case you need some machine/OS specific settings you can store them here without affecting git status.
+(setq my-local-config-path (concat user-emacs-directory "config-local.el"))
+(unless (file-exists-p my-local-config-path)
+  (copy-file (concat user-emacs-directory  "config-local-template.el")
+             my-local-config-path
              nil t nil nil))
-(require 'config-local "~/.emacs.d/config-local.el")
+(require 'config-local my-local-config-path)
 
 ;;;; settings for (newly created) frames
 
