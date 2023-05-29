@@ -874,8 +874,8 @@ Prefix argument N makes it go N lines down first."
   ;; Fira Mono font when available
   (let ((font "Fira Mono"))
     (when (font-info font)
-      (set-face-attribute 'default nil :font font)
-      (set-face-attribute 'default nil :height 140)))
+      (set-face-attribute 'default nil :font font)))
+  (set-face-attribute 'default nil :height 140)
   ;; this is for running emacs without daemon
   (setup-frame (selected-frame))
   (remove-hook 'focus-in-hook #'setup-frame-once))
