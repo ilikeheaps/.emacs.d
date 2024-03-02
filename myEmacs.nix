@@ -42,6 +42,9 @@ in
       wgrep-helm
       which-key
       yaml-mode
+      # stuff for git-annex (managing files spread over multiple locations incl. backups)
+      git-annex
+      magit-annex
     ]) ++ (with epkgs.melpaPackages; [
       centered-window
       csharp-mode
