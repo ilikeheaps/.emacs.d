@@ -303,12 +303,13 @@ Prefix argument N makes it go N lines down first."
  '(org-meta-line ((t (:inherit font-lock-comment-face :foreground "dark slate gray"))))
  '(mode-line ((t (:background "white" :foreground "black"))))
  '(mode-line-inactive ((t (:background "white" :foreground "#404040"))))
- '(powerline-inactive0 ((t (:inherit mode-line :background "#C0C0C0"))))
- '(powerline-inactive1 ((t (:inherit mode-line :background "#D0D0D0"))))
- '(powerline-inactive2 ((t (:inherit mode-line :background "#E0E0E0"))))
- '(powerline-active0 ((t (:inherit mode-line-inactive :background "#F0F0F0"))))
- '(powerline-active1 ((t (:inherit mode-line-inactive :background "#F5F5F5"))))
- '(powerline-active2 ((t (:inherit mode-line-inactive :background "#FAFAFA"))))
+ ;; TODO port these colours over if needed (removing powerline)
+ ;; '(powerline-inactive0 ((t (:inherit mode-line :background "#C0C0C0"))))
+ ;; '(powerline-inactive1 ((t (:inherit mode-line :background "#D0D0D0"))))
+ ;; '(powerline-inactive2 ((t (:inherit mode-line :background "#E0E0E0"))))
+ ;; '(powerline-active0 ((t (:inherit mode-line-inactive :background "#F0F0F0"))))
+ ;; '(powerline-active1 ((t (:inherit mode-line-inactive :background "#F5F5F5"))))
+ ;; '(powerline-active2 ((t (:inherit mode-line-inactive :background "#FAFAFA"))))
  '(show-paren-match ((t (:background "#DDDDDD"))))
  '(default ((t :background "#FFFFFF")))
  ;; outline (and -> org-mode) headers
@@ -419,9 +420,6 @@ Prefix argument N makes it go N lines down first."
 ;;;;;; plantuml-mode
 (use-package plantuml-mode
   :mode "\\.\\(plantuml\\|pum\\|plu\\)\\'")
-;;;;;; powerline
-(use-package powerline
-  :demand)
 ;;;;;; racket-mode
 (use-package racket-mode
   :mode "\\.rkt[dl]?\\'")
@@ -572,10 +570,6 @@ Prefix argument N makes it go N lines down first."
 ;;;; smooth-scroll (disabled, didn't really like)
 ;; (require 'smooth-scroll)
 ;; (smooth-scroll-mode t)
-
-;;;; powerline (this funky status bar)
-;; (require 'powerline)
-(powerline-default-theme)
 
 ;;;; enable line wrapping
 ;; (global-visual-line-mode +1) ; is this +1 different from 1 ?

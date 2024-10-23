@@ -4,7 +4,6 @@
 
 let
   myEmacs = pkgs.emacs28.override {
-    withGTK2 = false;
     withGTK3 = false;
   };
   emacsWithPackages = (pkgs.emacsPackagesFor myEmacs).emacsWithPackages;
@@ -31,7 +30,6 @@ in
       org-tree-slide
       outshine
       plantuml-mode
-      powerline
       rainbow-delimiters
       rust-playground
       sbt-mode
