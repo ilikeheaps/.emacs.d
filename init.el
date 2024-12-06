@@ -68,11 +68,23 @@
            ;; just for testing purposes
            (garbage-collect)))))
 
+;; (defun gc-if-not-focused ()
+;;   "Run garbage collection if no frame is focused."
+;;   (unless (seq-some #'frame-focus-state (frame-list)) (garbage-collect))
+;;   )
+
 ;;;;; Actual settings
-(setq garbage-collection-messages nil)
+
+;; TODO not sure if it works right with multiple frames (restart?)q
+;; gc when you change focus from Emacs
+;; (add-function :after
+;;               after-focus-change-function
+;;               #'gc-if-not-focused)
+
+(setq garbage-collection-messages t)
 (setq gc-cons-threshold
-      (* 120 1024 1024))
-(enable-idle-gc 1)
+      (* 12 1024 1024))
+
 ;; (disable-idle-gc)
 
 ;;;; titlebar format
