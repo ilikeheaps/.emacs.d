@@ -84,6 +84,7 @@
 (setq garbage-collection-messages t)
 (setq gc-cons-threshold
       (* 12 1024 1024))
+(enable-idle-gc 1)
 
 ;; (disable-idle-gc)
 
