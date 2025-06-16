@@ -49,6 +49,7 @@ in
       dired-narrow
       proof-general
       # ^ stable melpa version just didn't work
+      lsp-haskell
       magit
       # ^ stable melpa is 2.9 with bug: https://github.com/magit/magit/issues/3843
       flycheck-plantuml
