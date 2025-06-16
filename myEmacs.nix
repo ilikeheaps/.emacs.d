@@ -52,6 +52,8 @@ in
       lsp-haskell
       magit
       # ^ stable melpa is 2.9 with bug: https://github.com/magit/magit/issues/3843
+      nix-mode
+      # ^ stable version isn't updated for Emacs 28.x: https://github.com/doomemacs/doomemacs/issues/4534
       flycheck-plantuml
       forth-mode
       racket-mode
