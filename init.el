@@ -65,8 +65,8 @@
          delay
          t
          (lambda ()
-           ;; just for testing purposes
-           (garbage-collect)))))
+           (unless (seq-some #'frame-focus-state (frame-list))
+             (garbage-collect))))))
 
 ;; (defun gc-if-not-focused ()
 ;;   "Run garbage collection if no frame is focused."
