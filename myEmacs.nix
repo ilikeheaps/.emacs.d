@@ -23,7 +23,6 @@ in
       helm
       htmlize
       lispy
-      lsp-metals
       lsp-mode
       lua-mode
       org-bullets
