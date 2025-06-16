@@ -3,7 +3,7 @@
 }:
 
 let
-  myEmacs = pkgs.emacs28.override {
+  myEmacs = pkgs.emacs30.override {
     withGTK3 = false;
   };
   emacsWithPackages = (pkgs.emacsPackagesFor myEmacs).emacsWithPackages;
@@ -35,7 +35,6 @@ in
       scala-mode
       sublimity
       tuareg
-      use-package
       wgrep-helm
       which-key
       yaml-mode
