@@ -36,58 +36,14 @@
 ;; NOTE now this makes customize handicapped because the file isn't loaded -- it can't be loaded because it would conflict with this file's customize sections which I don't want to be automatically changed by customize
 (setq custom-file (concat user-emacs-directory "custom.el"))
 
+;;;; temporary GC setting for loading configuration
+(setq gc-cons-threshold (* 100 1024 1024))
+
 ;;;; disable interlock (.#file) and backup (file~) files
 ;; I'm the only user and only use one instance (emacs --daemon) so it's not needed and some tools bug out due to unexpected files (like bloop)
 (setq create-lockfiles nil)
 
 (setq make-backup-files nil)
-;;;; garbage collection settings
-;; For consideration: set gc-threshold absurdly high just for the init script
-;; ~~ after-init-hook
-;;;;; Variable and function definitions
-(defvar idle-gc-timer nil
-  "Timer object for garbage collection on idle.")
-
-(defun disable-idle-gc ()
-  "Disable garbage collection on idle."
-  (interactive)
-  (when idle-gc-timer
-    (cancel-timer idle-gc-timer)
-    (setq idle-gc-timer nil)))
-
-(defun enable-idle-gc (delay)
-  "Enable garbage collection on idle after DELAY."
-  (interactive)
-  (when idle-gc-timer
-    (disable-idle-gc))
-  (setq idle-gc-timer
-        (run-with-idle-timer
-         delay
-         t
-         (lambda ()
-           (unless (seq-some #'frame-focus-state (frame-list))
-             (garbage-collect))))))
-
-;; (defun gc-if-not-focused ()
-;;   "Run garbage collection if no frame is focused."
-;;   (unless (seq-some #'frame-focus-state (frame-list)) (garbage-collect))
-;;   )
-
-;;;;; Actual settings
-
-;; TODO not sure if it works right with multiple frames (restart?)q
-;; gc when you change focus from Emacs
-;; (add-function :after
-;;               after-focus-change-function
-;;               #'gc-if-not-focused)
-
-(setq garbage-collection-messages t)
-(setq gc-cons-threshold
-      (* 12 1024 1024))
-(enable-idle-gc 1)
-
-;; (disable-idle-gc)
-
 ;;;; titlebar format
 ;; (setq frame-title-format
 ;;      '(multiple-frames "%b" ("" invocation-name "@" system-name " - %b")))
@@ -999,4 +955,50 @@ Prefix argument N makes it go N lines down first."
 (use-package proof-general
   :mode ("\\.v\\'" . coq-mode)
   :config (setq coq-compile-before-require t))
+;;;; garbage collection settings
+;; For consideration: set gc-threshold absurdly high just for the init script
+;; ~~ after-init-hook
+;;;;; Variable and function definitions
+;; TODO consider GCMH package instead
+(defvar idle-gc-timer nil
+  "Timer object for garbage collection on idle.")
+
+(defun disable-idle-gc ()
+  "Disable garbage collection on idle."
+  (interactive)
+  (when idle-gc-timer
+    (cancel-timer idle-gc-timer)
+    (setq idle-gc-timer nil)))
+
+(defun enable-idle-gc (delay)
+  "Enable garbage collection on idle (only when no frame is focused) after DELAY. Might have a couple bad edge cases but generally the intent is to run GC when you switch to another (non-Emacs) window (frame)."
+  (interactive)
+  (when idle-gc-timer
+    (disable-idle-gc))
+  (setq idle-gc-timer
+        (run-with-idle-timer
+         delay
+         t
+         (lambda ()
+           (unless (seq-some #'frame-focus-state (frame-list))
+             (garbage-collect))))))
+
+;; (defun gc-if-not-focused ()
+;;   "Run garbage collection if no frame is focused."
+;;   (unless (seq-some #'frame-focus-state (frame-list)) (garbage-collect))
+;;   )
+
+;;;;; Actual settings
+
+;; TODO not sure if it works right with multiple frames (restart?)q
+;; gc when you change focus from Emacs
+;; (add-function :after
+;;               after-focus-change-function
+;;               #'gc-if-not-focused)
+
+(setq garbage-collection-messages t)
+(setq gc-cons-threshold
+      (* 12 1024 1024))
+(enable-idle-gc 1)
+
 ;;; init.el ends here
